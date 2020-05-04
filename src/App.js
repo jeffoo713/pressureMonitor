@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Header from './component/Header/Header.component';
+import AddPage from './component/Pages/AddPage/AddPage.component';
+import HistoryPage from './component/Pages/HistoryPage/HistoryPage.component';
+import StatisticsPage from './component/Pages/StatisticsPage/Statistics.component';
+
+import './App.scss';
+
+
+
+class App extends React.Component {
+
+  render() {
+    const { match } = this.props
+    return (
+      <div className="App">
+        <Header />
+        <Route exact path={`${match.url}add`} component={AddPage}/>
+        <Route exact path={`${match.url}history`} component={HistoryPage}/>
+        <Route exact path={`${match.url}statistics`} component={StatisticsPage}/>
+      </div>
+    );
+  }
 }
 
-export default App;
+export default withRouter(App);
