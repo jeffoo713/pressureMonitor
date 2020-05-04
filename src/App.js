@@ -8,6 +8,7 @@ import HistoryPage from './component/Pages/HistoryPage/HistoryPage.component';
 import StatisticsPage from './component/Pages/StatisticsPage/Statistics.component';
 
 import './App.scss';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
