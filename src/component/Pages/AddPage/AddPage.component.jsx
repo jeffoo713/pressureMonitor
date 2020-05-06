@@ -3,6 +3,30 @@ import { Jumbotron, ProgressBar, Button, Row, Col, ListGroup, Badge, Form } from
 import './AddPage.styles.scss';
 
 class AddPage extends React.Component {
+constructor() {
+  super()
+
+  this.state= {
+    id: '',
+    sys: '',
+    dia: '',
+    bpm: '',
+    time: ''
+  }
+}
+
+handleSubmit= event => {
+  event.preventDefault();
+  const { id, sys, dia, bpm, time } = this.state;
+  console.log(this.state);
+  //function to add the data
+}
+
+
+handleChange = event => {
+  const { name, value } = event.target;
+  this.setState({ [name]: value});
+}
 
   render() {
     const categoryTitleStyle = {marginBottom: '-5px'}
@@ -32,7 +56,7 @@ class AddPage extends React.Component {
                 borderRadius: '7px'
               }}
               >
-                <div>
+                <div style={{ width: '96%', margin: 'auto' }} >
                   <Row>
                     <Col>
                       <h5 style={categoryTitleStyle} >SYSTOLIC</h5>
@@ -48,16 +72,58 @@ class AddPage extends React.Component {
                     </Col>
                   </Row>
                 </div>
-                <Form.Group style={{ display: 'flex', paddingTop: '20px'}}>
-                  <Form.Control size="lg" type="number" placeholder="SYS" />
-                  <Form.Control size="lg" type="number" placeholder="DIA" />
-                  <Form.Control size="lg" type="number" placeholder="BPM" />
+                <Form.Group 
+                  style={{ 
+                    display: 'flex',
+                    justifyContent: 'space-evenly', 
+                    paddingTop: '20px'
+                  }}
+                > 
+                  <Col>
+                    <Form.Control 
+                      size="lg" 
+                      placeholder="SYS"
+                      type="number" 
+                      name='sys' 
+                      value={this.state.sys}
+                      onChange={this.handleChange}
+                      required
+                    />
+                  </Col>
+                  <Col>
+                    <Form.Control 
+                      size="lg" 
+                      placeholder="DIA"
+                      type="number" 
+                      name='dia' 
+                      value={this.state.dia}
+                      onChange={this.handleChange}
+                      required
+                    />
+                  </Col>
+                  <Col>
+                    <Form.Control 
+                      size="lg" 
+                      placeholder="BPM" 
+                      type="number" 
+                      name='bpm' 
+                      value={this.state.bpm}
+                      onChange={this.handleChange}
+                      required
+                    />
+                  </Col>
                 </Form.Group>
                 <div> calender and clock will be here</div>
               </div>
             </Row>
             <Row style={{ paddingTop: '50px' }}>
-              <Button variant="primary" className="col-8 mx-auto">ADD</Button>
+              <Button 
+                variant="primary" 
+                className="col-8 mx-auto"
+                onClick={this.handleSubmit}
+              >
+                ADD
+              </Button>
             </Row>
             <Row>
               <ListGroup className="col-12" style={{ paddingTop: '50px' }}>
