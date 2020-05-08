@@ -1,32 +1,59 @@
 import React from 'react';
+
+import { v4 as uuidv4 } from 'uuid';
+
 import { Jumbotron, ProgressBar, Button, Row, Col, ListGroup, Badge, Form } from 'react-bootstrap';
 import './AddPage.styles.scss';
 
 class AddPage extends React.Component {
-constructor() {
-  super()
-
-  this.state= {
-    id: '',
-    sys: '',
-    dia: '',
-    bpm: '',
-    time: ''
+  constructor() {
+    super()
+  
+    this.state= {
+      currentData: {
+        sys: '',
+        dia: '',
+        bpm: ''
+      },
+      data: []
+    }
   }
-}
 
-handleSubmit= event => {
-  event.preventDefault();
-  const { id, sys, dia, bpm, time } = this.state;
-  console.log(this.state);
-  //function to add the data
-}
+  storeData = ({sys, dia, bpm}) => {
+    const time = new Date();
+    const id = uuidv4();
+    this.state.data.push({ id, sys, dia, bpm, time });
+
+    this.setState({ 
+      currentData: {
+        sys: '',
+        dia: '',
+        bpm: ''
+      }}, ()=> console.log(this.state));
+
+  }
+
+  handleSubmit= event => {
+    event.preventDefault();
+    const { sys, dia, bpm} = this.state.currentData;
+    //function to add the data
+    this.storeData({ sys, dia, bpm});
+  
+  }
 
 
-handleChange = event => {
-  const { name, value } = event.target;
-  this.setState({ [name]: value});
-}
+  handleChange = event => {
+    const { name, value } = event.target;
+
+    if ( value > 0) {
+      const { currentData } = { ...this.state }
+      const measure = currentData;
+      measure[name] = value;
+     
+      this.setState({ currentData: measure });
+    }
+  }
+  
 
   render() {
     const categoryTitleStyle = {marginBottom: '-5px'}
@@ -85,7 +112,7 @@ handleChange = event => {
                       placeholder="SYS"
                       type="number" 
                       name='sys' 
-                      value={this.state.sys}
+                      value={this.state.currentData.sys}
                       onChange={this.handleChange}
                       required
                     />
@@ -96,7 +123,7 @@ handleChange = event => {
                       placeholder="DIA"
                       type="number" 
                       name='dia' 
-                      value={this.state.dia}
+                      value={this.state.currentData.dia}
                       onChange={this.handleChange}
                       required
                     />
@@ -107,7 +134,7 @@ handleChange = event => {
                       placeholder="BPM" 
                       type="number" 
                       name='bpm' 
-                      value={this.state.bpm}
+                      value={this.state.currentData.bpm}
                       onChange={this.handleChange}
                       required
                     />
