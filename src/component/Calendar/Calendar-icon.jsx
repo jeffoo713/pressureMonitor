@@ -6,7 +6,6 @@ const CalendarIcon = ({toggleCalendar}) => (
       name="calendar-outline" 
       size="large"
       onClick={toggleCalendar}
-      style={{ cursor: 'pointer'}}
     />
   </div>
 )
