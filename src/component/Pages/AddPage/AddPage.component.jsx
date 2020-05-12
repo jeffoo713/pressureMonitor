@@ -4,60 +4,69 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { Jumbotron, ProgressBar, Button, Row, Col, ListGroup, Badge, Form } from 'react-bootstrap';
 import './AddPage.styles.scss';
+import 'react-calendar/dist/Calendar.css';
+
+import Calendar from 'react-calendar';
 
 class AddPage extends React.Component {
   constructor() {
     super()
-  
-    this.state= {
+
+    this.state = {
       currentData: {
         sys: '',
         dia: '',
         bpm: ''
       },
-      data: []
+      data: [],
+      date: new Date()
     }
   }
 
-  storeData = ({sys, dia, bpm}) => {
+  storeData = ({ sys, dia, bpm }) => {
     const time = new Date();
     const id = uuidv4();
     this.state.data.push({ id, sys, dia, bpm, time });
 
-    this.setState({ 
+    this.setState({
       currentData: {
         sys: '',
         dia: '',
         bpm: ''
-      }}, ()=> console.log(this.state));
+      }
+    }, () => console.log(this.state));
 
   }
 
-  handleSubmit= event => {
+  handleSubmit = event => {
     event.preventDefault();
-    const { sys, dia, bpm} = this.state.currentData;
+    const { sys, dia, bpm } = this.state.currentData;
     //function to add the data
-    this.storeData({ sys, dia, bpm});
-  
+    this.storeData({ sys, dia, bpm });
+
+  }
+
+  handleChange = (dateData) => {
+    this.setState({ date: dateData });
   }
 
 
   handleChange = event => {
     const { name, value } = event.target;
 
-    if ( value > 0) {
+    if (value > 0) {
       const { currentData } = { ...this.state }
       const measure = currentData;
       measure[name] = value;
-     
+
       this.setState({ currentData: measure });
     }
   }
-  
+
 
   render() {
-    const categoryTitleStyle = {marginBottom: '-5px'}
-    const chartBadgeStyle = {width: '60%'}
+    const categoryTitleStyle = { marginBottom: '-5px' }
+    const chartBadgeStyle = { width: '60%' }
     return (
       <div className='add-page'>
         <Row style={{ paddingTop: '40px' }}>
@@ -70,18 +79,17 @@ class AddPage extends React.Component {
           </ProgressBar>
         </Row>
         <Row style={{ paddingTop: '30px' }}>
-          <Jumbotron 
+          <Jumbotron
             className='col-8 mx-auto'
             style={{ padding: '70px', paddingTop: '60px' }}
           >
             <Row>
-              <div 
-              className="bg-danger col-12" 
-              style={{ 
-                height: '250px',
-                paddingTop: '30px',
-                borderRadius: '7px'
-              }}
+              <div
+                className="bg-danger col-12"
+                style={{
+                  paddingTop: '30px',
+                  borderRadius: '7px'
+                }}
               >
                 <div style={{ width: '96%', margin: 'auto' }} >
                   <Row>
@@ -99,53 +107,59 @@ class AddPage extends React.Component {
                     </Col>
                   </Row>
                 </div>
-                <Form.Group 
-                  style={{ 
+                <Form.Group
+                  style={{
                     display: 'flex',
-                    justifyContent: 'space-evenly', 
+                    justifyContent: 'space-evenly',
                     paddingTop: '20px'
                   }}
-                > 
+                >
                   <Col>
-                    <Form.Control 
-                      size="lg" 
+                    <Form.Control
+                      size="lg"
                       placeholder="SYS"
-                      type="number" 
-                      name='sys' 
+                      type="number"
+                      name='sys'
                       value={this.state.currentData.sys}
                       onChange={this.handleChange}
                       required
                     />
                   </Col>
                   <Col>
-                    <Form.Control 
-                      size="lg" 
+                    <Form.Control
+                      size="lg"
                       placeholder="DIA"
-                      type="number" 
-                      name='dia' 
+                      type="number"
+                      name='dia'
                       value={this.state.currentData.dia}
                       onChange={this.handleChange}
                       required
                     />
                   </Col>
                   <Col>
-                    <Form.Control 
-                      size="lg" 
-                      placeholder="BPM" 
-                      type="number" 
-                      name='bpm' 
+                    <Form.Control
+                      size="lg"
+                      placeholder="BPM"
+                      type="number"
+                      name='bpm'
                       value={this.state.currentData.bpm}
                       onChange={this.handleChange}
                       required
                     />
                   </Col>
                 </Form.Group>
-                <div> calender and clock will be here</div>
+                <div>
+                  <Calendar
+                    className="col-12"
+                    onChange={this.onChange}
+                    value={this.state.date}
+                  />
+                </div>
               </div>
             </Row>
             <Row style={{ paddingTop: '50px' }}>
-              <Button 
-                variant="primary" 
+              <Button
+                variant="primary"
                 className="col-8 mx-auto"
                 onClick={this.handleSubmit}
               >
@@ -168,7 +182,7 @@ class AddPage extends React.Component {
                       <Badge variant="danger" style={chartBadgeStyle}>&nbsp;</Badge>
                     </Col>
                     <Col>
-                    Stgae 2 Hypertension
+                      Stgae 2 Hypertension
                     </Col>
                     <Col>&#62; 160</Col>
                     <Col>&#62; 100</Col>
@@ -180,7 +194,7 @@ class AddPage extends React.Component {
                       <Badge variant="warning" style={chartBadgeStyle}>&nbsp;</Badge>
                     </Col>
                     <Col>
-                    Stgae 1 Hypertension
+                      Stgae 1 Hypertension
                     </Col>
                     <Col>141-160</Col>
                     <Col>91-100</Col>
@@ -192,7 +206,7 @@ class AddPage extends React.Component {
                       <Badge variant="success" style={chartBadgeStyle}>&nbsp;</Badge>
                     </Col>
                     <Col>
-                    Prehypertension
+                      Prehypertension
                     </Col>
                     <Col>121-140</Col>
                     <Col>91-90</Col>
