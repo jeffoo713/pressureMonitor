@@ -5,13 +5,11 @@ import { v4 as uuidv4 } from 'uuid';
 import Bar from '../../Bar/Bar.component';
 import InputLabels from '../../Input-labels/Input-labels.component';
 import Chart from '../../Chart/Chart.component';
-
-import { Jumbotron, Button, Col, Form } from 'react-bootstrap';
-import './AddPage.styles.scss';
-import 'react-calendar/dist/Calendar.css';
-
 import CalendarIcon from '../../Calendar/Calendar-icon';
 import CalendarForm from '../../Calendar/Calendar.component';
+
+import { Jumbotron, Button, Col, Form } from 'react-bootstrap';
+
 class AddPage extends React.Component {
   constructor() {
     super()

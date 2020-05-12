@@ -3,9 +3,7 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 const InputLabels = () => {
-
   const categoryTitleStyle = { marginBottom: '-5px' }
-
   return (
   <div style={{ width: '96%', margin: 'auto' }} >
     <Row>
