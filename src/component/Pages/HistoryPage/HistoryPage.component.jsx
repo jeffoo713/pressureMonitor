@@ -1,15 +1,25 @@
 import React from 'react';
 
+import DATA from './data';
+
+import {ListGroup} from 'react-bootstrap'
+
 class HistoryPage extends React.Component {
   constructor() {
     super()
 
-    this.state= {}
+    this.state= DATA
   }
   
   render() {
     return (
-      <div>HistoryPage</div>
+      <div>
+        <ListGroup>
+          <ListGroup.Item variant="primary">
+            Primary
+          </ListGroup.Item>
+        </ListGroup>
+      </div>
     )
   }
 }
