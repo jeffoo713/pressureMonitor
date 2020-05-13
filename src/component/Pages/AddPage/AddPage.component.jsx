@@ -19,6 +19,7 @@ class AddPage extends React.Component {
       dia: '',
       bpm: '',
       date: undefined,
+      category: '',
       data: [],
       calendarHidden: true
     }
@@ -30,17 +31,31 @@ class AddPage extends React.Component {
     return monthData
   }
 
+  selectCategory = (sys) => {
+    //const catArr = ['hypotension', 'Normal', 'Prehypertension', 'Stage1 Hypertension', 'Stage2 Hypertension'];
+    if (sys <= 90 ) return ['hypotension', 'secondary'];
+    if (sys >90 && sys <= 120) return ['Normal', 'primary'];
+    if (sys >120 && sys <= 140) return ['Prehypertension', 'success'];
+    if (sys >140 && sys <= 160) return ['Stage1 Hypertension', 'warning'];
+    if (sys > 160 ) return ['Stage2 Hypertension', 'danger'];
+  }
+
   storeData = ({ sys, dia, bpm }) => {
     const id = uuidv4();
+
     const defautDate = new Date()
     const dateObj = this.state.date === undefined? defautDate: this.state.date ;
     const date = dateObj.getDate()
     const month = this.selectMonth(dateObj.getMonth())
     const year = dateObj.getYear()+1900
     
+    const categoryArr = this.selectCategory(sys);
+    const category = categoryArr[0];
+    const colorCode = categoryArr[1];
+
     const inputDate = `${month} ${date},${year}`
-    console.log(date, month, year)
-    this.state.data.push({ id, sys, dia, bpm, inputDate });
+
+    this.state.data.push({ id, sys, dia, bpm, category, colorCode, inputDate });
 
     this.setState({
         sys: '',
