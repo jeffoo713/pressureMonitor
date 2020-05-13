@@ -35,11 +35,11 @@ class AddPage extends React.Component {
 
   selectCategory = (sys) => {
     //const catArr = ['hypotension', 'Normal', 'Prehypertension', 'Stage1 Hypertension', 'Stage2 Hypertension'];
-    if (sys <= 90 ) return 'hypotension';
-    if (sys >90 && sys <= 120) return 'Normal'
-    if (sys >120 && sys <= 140) return 'Prehypertension'
-    if (sys >140 && sys <= 160) return 'Stage1 Hypertension'
-    if (sys > 160 ) return 'Stage2 Hypertension';
+    if (sys <= 90 ) return ['hypotension', 'secondary'];
+    if (sys >90 && sys <= 120) return ['Normal', 'primary'];
+    if (sys >120 && sys <= 140) return ['Prehypertension', 'success'];
+    if (sys >140 && sys <= 160) return ['Stage1 Hypertension', 'warning'];
+    if (sys > 160 ) return ['Stage2 Hypertension', 'danger'];
   }
 
   storeData = ({ sys, dia, bpm }) => {
@@ -51,11 +51,13 @@ class AddPage extends React.Component {
     const month = this.selectMonth(dateObj.getMonth())
     const year = dateObj.getYear()+1900
     
-    const category = this.selectCategory(sys);
-    
+    const categoryArr = this.selectCategory(sys);
+    const category = categoryArr[0];
+    const colorCode = categoryArr[1];
+
     const inputDate = `${month} ${date},${year}`
 
-    this.state.data.push({ id, sys, dia, bpm, category, inputDate });
+    this.state.data.push({ id, sys, dia, bpm, category, colorCode, inputDate });
 
     this.setState({
         sys: '',
