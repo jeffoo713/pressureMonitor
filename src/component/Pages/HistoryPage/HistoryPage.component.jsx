@@ -1,25 +1,29 @@
 import React from 'react';
 
+import ListItem from '../../List-item/List-item.component';
+import Container from '../../Container/Container.component';
+
 import DATA from './data';
 
-import {ListGroup} from 'react-bootstrap'
+import { ListGroup } from 'react-bootstrap';
 
 class HistoryPage extends React.Component {
   constructor() {
     super()
 
-    this.state= DATA
+    this.state= { DATA }
   }
   
   render() {
+    const { DATA } = this.state
     return (
-      <div>
+      <Container >
         <ListGroup>
-          <ListGroup.Item variant="primary">
-            Primary
-          </ListGroup.Item>
+          {
+            DATA.reverse().map((data) => <ListItem key={data.id} {...data} /> )
+          }
         </ListGroup>
-      </div>
+      </Container>
     )
   }
 }
