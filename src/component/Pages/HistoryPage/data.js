@@ -33,18 +33,20 @@ const DATA = [
   },
   {
     id: 1,
-    sys: 123,
+    sys: 141,
     dia: 84,
     bpm: 67,
-    category: 'Prehypertension',
+    category: 'Stage1 Hypertension',
     inputDate: 'May 12 2020'
   },
   {
     id: 1,
-    sys: 123,
+    sys: 145,
     dia: 84,
     bpm: 67,
-    category: 'Prehypertension',
+    category: 'Stage1 Hypertension',
     inputDate: 'May 12 2020'
   }
-]
+];
+
+export default DATA;
