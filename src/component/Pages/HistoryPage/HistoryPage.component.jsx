@@ -20,7 +20,7 @@ class HistoryPage extends React.Component {
       <Container >
         <ListGroup>
           {
-            DATA.reverse().map((data) => <ListItem key={data.id} {...data} /> )
+            DATA.map((data) => <ListItem key={data.id} {...data} /> )
           }
         </ListGroup>
       </Container>
