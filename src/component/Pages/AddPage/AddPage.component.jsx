@@ -7,6 +7,7 @@ import InputLabels from '../../Input-labels/Input-labels.component';
 import Chart from '../../Chart/Chart.component';
 import CalendarIcon from '../../Calendar/Calendar-icon';
 import CalendarForm from '../../Calendar/Calendar.component';
+import Container from '../../Container/Container.component';
 
 import { Jumbotron, Button, Col, Form } from 'react-bootstrap';
 
@@ -93,14 +94,7 @@ class AddPage extends React.Component {
     return (
       <div style={{ height: '100%' }} >
         <Bar />
-        <Jumbotron
-          className='col-8 mx-auto'
-          style={{ 
-            padding: '40px, 50px',  
-            paddingTop: '40px',
-            marginTop: '30px' 
-          }}
-        >
+        <Container>
           <div
             className="bg-danger col-12"
             style={{
@@ -170,7 +164,7 @@ class AddPage extends React.Component {
             </Button>
           </div>
           <Chart />
-        </Jumbotron>
+        </Container>
       </div>
     )
   }
