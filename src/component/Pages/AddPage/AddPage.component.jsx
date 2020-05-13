@@ -20,7 +20,6 @@ class AddPage extends React.Component {
       dia: '',
       bpm: '',
       date: undefined,
-      category: '',
       data: [],
       calendarHidden: true
     }
@@ -56,7 +55,9 @@ class AddPage extends React.Component {
 
     const inputDate = `${month} ${date},${year}`
 
-    this.state.data.push({ id, sys, dia, bpm, category, colorCode, inputDate });
+    this.state.data.push({ id, sys, dia, bpm, category, inputDate, colorCode, dateObj });
+
+    this.state.data.sort(((a, b) => b.dateObj - a.dateObj))
 
     this.setState({
         sys: '',
