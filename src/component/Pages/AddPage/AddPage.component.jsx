@@ -9,7 +9,7 @@ import CalendarIcon from '../../Calendar/Calendar-icon';
 import CalendarForm from '../../Calendar/Calendar.component';
 import Container from '../../Container/Container.component';
 
-import { Jumbotron, Button, Col, Form } from 'react-bootstrap';
+import { Button, Col, Form } from 'react-bootstrap';
 
 class AddPage extends React.Component {
   constructor() {

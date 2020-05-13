@@ -17,7 +17,7 @@ class HistoryPage extends React.Component {
   render() {
     const { DATA } = this.state
     return (
-      <Container>
+      <Container >
         <ListGroup>
           {
             DATA.reverse().map((data) => <ListItem key={data.id} {...data} /> )

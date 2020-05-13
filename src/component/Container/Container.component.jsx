@@ -9,7 +9,7 @@ const Container = ({children}) => (
       padding: '40px, 50px',  
       paddingTop: '40px',
       marginTop: '30px',
-      minHeight: '80vh' 
+      minHeight: '90vh' 
     }}
   >
     {children}
