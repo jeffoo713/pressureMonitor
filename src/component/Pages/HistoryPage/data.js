@@ -24,7 +24,7 @@ const DATA = [
     inputDate: 'May 12 2020'
   },
   {
-    id: 4,
+    id: 1,
     sys: 123,
     dia: 84,
     bpm: 67,
@@ -32,19 +32,19 @@ const DATA = [
     inputDate: 'May 12 2020'
   },
   {
-    id: 5,
-    sys: 110,
+    id: 1,
+    sys: 123,
     dia: 84,
     bpm: 67,
-    category: 'Normal',
+    category: 'Prehypertension',
     inputDate: 'May 12 2020'
   },
   {
-    id: 6,
-    sys: 145,
+    id: 1,
+    sys: 123,
     dia: 84,
     bpm: 67,
-    category: 'Stage1 Hypertension',
+    category: 'Prehypertension',
     inputDate: 'May 12 2020'
   }
 ]
