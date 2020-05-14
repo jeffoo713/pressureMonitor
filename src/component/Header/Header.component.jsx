@@ -4,13 +4,16 @@ import { withRouter } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
-import './Header.styles.scss';
-
 const Header = ({ history, match }) => {
   return (
-    <div className='header'>
+    <div style={{ width: '100%'}}>
       <Navbar bg="dark" variant="dark">
-        <Navbar.Brand href="#home">Blood Pressure Monitor</Navbar.Brand>
+        <Navbar.Brand 
+          onClick={()=> history.push('/')} 
+          style={{ cursor: 'pointer' }}
+        >
+          Blood Pressure Monitor
+        </Navbar.Brand>
         <Nav className="mr-auto">
           <Nav.Link onClick={()=> history.push(`${match.url}add`)}>add</Nav.Link>
           <Nav.Link onClick={()=> history.push(`${match.url}history`)}>history</Nav.Link>
