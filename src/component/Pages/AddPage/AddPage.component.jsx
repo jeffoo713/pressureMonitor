@@ -5,11 +5,12 @@ import { v4 as uuidv4 } from 'uuid';
 import Bar from '../../Bar/Bar.component';
 import InputLabels from '../../Input-labels/Input-labels.component';
 import Chart from '../../Chart/Chart.component';
-import CalendarIcon from '../../Calendar/Calendar-icon';
+import CalendarIcon from '../../Calendar/Calendar-icon.component';
 import CalendarForm from '../../Calendar/Calendar.component';
 import Container from '../../Container/Container.component';
+import CustomButton from '../../Button/Button.component';
 
-import { Button, Col, Form } from 'react-bootstrap';
+import { Col, Form } from 'react-bootstrap';
 
 class AddPage extends React.Component {
   constructor() {
@@ -100,6 +101,8 @@ class AddPage extends React.Component {
             className="bg-danger col-12"
             style={{
               paddingTop: '30px',
+              paddingBottom: '20px',
+              marginBottom: '50px',
               borderRadius: '7px'
             }}
           >
@@ -155,14 +158,9 @@ class AddPage extends React.Component {
               <CalendarForm dateChange={this.dateChange} value={this.state.date} />
               </div> 
             }
-            <Button
-                variant="primary"
-                className="col-8 mx-auto"
-                style={{ marginTop: '10px', marginBottom: '20px' }}
-                onClick={this.handleSubmit}
-            >
+            <CustomButton handleClick={this.handleSubmit} >
               ADD
-            </Button>
+            </CustomButton>
           </div>
           <Chart />
         </Container>

@@ -5,7 +5,7 @@ import { Row, Col, ListGroup, Badge } from 'react-bootstrap';
 const Chart = () => {
   const chartBadgeStyle = { width: '60%' }
   return (
-  <ListGroup className="col-12" style={{ paddingTop: '50px' }}>
+  <ListGroup className="col-12" >
     <ListGroup.Item>
       <Row>
         <Col></Col>
