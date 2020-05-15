@@ -1,3 +1,5 @@
 export const DataActionTypes = {
-  ADD_ITEM: 'ADD_ITEM'
+  ADD_ITEM: 'ADD_ITEM',
+  REMOVE_ITEM: 'REMOVE_ITEM',
+  CALCULATE_STATS: 'CALCULATE_STATS'
 }
