@@ -14,13 +14,21 @@ class HistoryPage extends React.Component {
     this.state= { DATA }
   }
   
+  removeData = (id) => {
+    const prevData = this.state.DATA;
+    console.log(prevData)
+    const newData = prevData.filter(data=> data.id !== id);
+    console.log(newData)
+    this.setState({ DATA: newData }, ()=> console.log(this.state))
+  }
+
   render() {
     const { DATA } = this.state
     return (
       <Container >
         <ListGroup>
           {
-            DATA.map((data) => <ListItem key={data.id} {...data} /> )
+            DATA.map((data) => <ListItem key={data.id} {...data} removeData={this.removeData} /> )
           }
         </ListGroup>
       </Container>
