@@ -8,25 +8,19 @@ import StatChart from '../../Statistic-chart/Statistic-chart.component';
 
 import { selectStatData } from '../../../redux/data/data.selectors';
 
-class StatisticsPage extends React.Component {
-  
-  render() {
-    const { statData } = this.props;
-    console.log( statData )
-    return (
-      <Container>
-        <div style={{ display: 'flex', justifyContent: 'space-evenly'}}>
-          <MeasurementGauge value={statData.avgSys} label='AVG.SYS' color={'#FF6384'} />
-          <MeasurementGauge value={statData.avgDia} label='AVG.DIA' color={'#36A2EB'} />
-          <MeasurementGauge value={statData.avgBpm} label='AVG.BPM' color={'#FFCE56'} />
-        </div>
-        <StatChart {...statData} />
-      </Container>
-    )
-  }
-}
+const StatisticsPage = ({ statData }) => (
+  <Container>
+    <div style={{ display: 'flex', justifyContent: 'space-evenly'}}>
+      <MeasurementGauge value={statData.avgSys} label='AVG.SYS' color={'#FF6384'} />
+      <MeasurementGauge value={statData.avgDia} label='AVG.DIA' color={'#36A2EB'} />
+      <MeasurementGauge value={statData.avgBpm} label='AVG.BPM' color={'#FFCE56'} />
+    </div>
+    <StatChart {...statData} />
+  </Container>
+)
 
 const mapStateToProps = createStructuredSelector({
   statData: selectStatData
 })
+
 export default connect(mapStateToProps)(StatisticsPage);

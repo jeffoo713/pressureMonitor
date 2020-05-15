@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ListGroup, Badge } from 'react-bootstrap';
 
-const ListItem = ({ id, sys, dia, bpm, category, colorCode, inputDate, removeData }) => (
+const ListItem = ({ id, sys, dia, bpm, category, colorCode, inputDate, removeData, calculateStats, dataArr }) => (
   <ListGroup.Item style={{ marginLeft: '40px', marginRight: '40px'}}>
     <div
       style={{
@@ -22,7 +22,10 @@ const ListItem = ({ id, sys, dia, bpm, category, colorCode, inputDate, removeDat
         <ion-icon 
         name="trash-outline"
         style={{ cursor: 'pointer'}}
-        onClick={() => removeData(id)}
+        onClick={() => {
+          removeData(id)
+          calculateStats(dataArr)
+        }}
         />
     </div>
   </ListGroup.Item>

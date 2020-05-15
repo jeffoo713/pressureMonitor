@@ -12,11 +12,12 @@ import CustomButton from '../../Button/Button.component';
 
 import { Col, Form } from 'react-bootstrap';
 
-import { returnItem, calculateStatsFromData } from '../../../redux/data/data.utils';
+import { returnItem } from '../../../redux/data/data.utils';
 
-import { addItem } from '../../../redux/data/data.actions';
+import { addItem, calculateStats } from '../../../redux/data/data.actions';
 import { toggleCalendar } from '../../../redux/calendar/calendar.actions';
 import { selectHiddenCalendar } from '../../../redux/calendar/calendar.selectors';
+import { selectDataArr } from '../../../redux/data/data.selectors';
 
 class AddPage extends React.Component {
   constructor(props) {
@@ -36,6 +37,7 @@ class AddPage extends React.Component {
     const itemToAdd = returnItem({ sys, dia, bpm, date })
 
     this.props.addItem(itemToAdd);
+    this.props.calculateStats(this.props.dataArr);
 
     this.setState({
       sys: '',
@@ -138,12 +140,13 @@ class AddPage extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  hiddenCalendar: selectHiddenCalendar
+  hiddenCalendar: selectHiddenCalendar,
+  dataArr: selectDataArr
 });
 
 const mapDispachToProps = dispatch => ({
   addItem: item => dispatch(addItem(item)),
-  calculateStatsFromData: data => dispatch(calculateStatsFromData(data)),
+  calculateStats: dataArr => dispatch(calculateStats(dataArr)),
   toggleCalendar: () => dispatch(toggleCalendar())
 })
 

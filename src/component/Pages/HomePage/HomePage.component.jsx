@@ -5,7 +5,7 @@ import Container from '../../Container/Container.component';
 import Chart from '../../Chart/Chart.component';
 import CustomButton from '../../Button/Button.component';
 
-const HomePage = ({ history, match}) => {
+const HomePage = ({ history, match }) => {
   const toAddPage = () => ( history.push(`${match.url}add`))
   return(
   <Container>
