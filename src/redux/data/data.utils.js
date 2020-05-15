@@ -34,3 +34,7 @@ export const addItemToData = (dataArr, itemToAdd) => {
   dataArr.push(itemToAdd);
   return dataArr.sort(((a, b) => b.dateObj - a.dateObj));
 }
+
+export const removeItemFromData = ( dataArr, itemToRemoveId ) => {
+  return dataArr.filter(data=> data.id !== itemToRemoveId)
+}

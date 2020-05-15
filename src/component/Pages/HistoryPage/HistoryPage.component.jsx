@@ -1,37 +1,32 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import ListItem from '../../List-item/List-item.component';
 import Container from '../../Container/Container.component';
 
-import DATA from './data';
-
 import { ListGroup } from 'react-bootstrap';
 
-class HistoryPage extends React.Component {
-  constructor() {
-    super()
+import { removeItem } from '../../../redux/data/data.actions';
 
-    this.state= { DATA }
-  }
-  
-  removeData = (id) => {
-    const prevData = this.state.DATA;
-    const newData = prevData.filter(data=> data.id !== id);
-    this.setState({ DATA: newData })
-  }
+const HistoryPage = ({ data, removeItem }) => {
 
-  render() {
-    const { DATA } = this.state
-    return (
-      <Container >
-        <ListGroup>
-          {
-            DATA.map((data) => <ListItem key={data.id} {...data} removeData={this.removeData} /> )
-          }
-        </ListGroup>
-      </Container>
-    )
-  }
+  return (
+    <Container >
+      <ListGroup>
+        {
+          data.map((data) => <ListItem key={data.id} {...data} removeData={removeItem} /> )
+        }
+      </ListGroup>
+    </Container>
+  )
 }
 
-export default HistoryPage;
+const mapStateToProps = state => ({
+  data: state.data.data
+})
+
+const mapDispatchToProps = dispatch => ({
+  removeItem: id => dispatch(removeItem(id))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(HistoryPage);

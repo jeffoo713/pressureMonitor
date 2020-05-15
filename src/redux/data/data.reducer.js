@@ -1,6 +1,6 @@
 import { DataActionTypes } from './data.types';
 
-import { addItemToData } from './data.utils';
+import { addItemToData, removeItemFromData } from './data.utils';
 
 
 const INITIAL_VALUE = {
@@ -13,6 +13,11 @@ const dataReducer = (state=INITIAL_VALUE, action) => {
       return {
         ...state,
         data: addItemToData(state.data, action.payload)
+      }
+    case DataActionTypes.REMOVE_ITEM:
+      return{
+        ...state,
+        data: removeItemFromData(state.data, action.payload)
       }
     default:
       return state;
