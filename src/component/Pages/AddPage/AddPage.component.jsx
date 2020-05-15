@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect'
 
 import Bar from '../../Bar/Bar.component';
 import InputLabels from '../../Input-labels/Input-labels.component';
@@ -11,10 +12,11 @@ import CustomButton from '../../Button/Button.component';
 
 import { Col, Form } from 'react-bootstrap';
 
-import { returnItem } from '../../../redux/data/data.utils';
+import { returnItem, calculateStatsFromData } from '../../../redux/data/data.utils';
 
 import { addItem } from '../../../redux/data/data.actions';
 import { toggleCalendar } from '../../../redux/calendar/calendar.actions';
+import { selectHiddenCalendar } from '../../../redux/calendar/calendar.selectors';
 
 class AddPage extends React.Component {
   constructor(props) {
@@ -135,12 +137,13 @@ class AddPage extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  hiddenCalendar: state.calendar.hiddenCalendar
+const mapStateToProps = createStructuredSelector({
+  hiddenCalendar: selectHiddenCalendar
 });
 
 const mapDispachToProps = dispatch => ({
   addItem: item => dispatch(addItem(item)),
+  calculateStatsFromData: data => dispatch(calculateStatsFromData(data)),
   toggleCalendar: () => dispatch(toggleCalendar())
 })
 

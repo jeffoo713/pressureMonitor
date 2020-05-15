@@ -1,10 +1,24 @@
 import { DataActionTypes } from './data.types';
 
-import { addItemToData, removeItemFromData } from './data.utils';
+import { 
+  addItemToData, 
+  removeItemFromData, 
+  calculateStatsFromData 
+} from './data.utils';
 
 
 const INITIAL_VALUE = {
-  data: []
+  data: [],
+  statData: {
+    avgSys: '',
+    avgDia: '',
+    avgBpm: '',
+    hypoPerc: '',
+    norPerc: '',
+    prePerc: '',
+    st1Perc: '',
+    st2Perc: ''
+  }
 };
 
 const dataReducer = (state=INITIAL_VALUE, action) => {
@@ -18,6 +32,11 @@ const dataReducer = (state=INITIAL_VALUE, action) => {
       return{
         ...state,
         data: removeItemFromData(state.data, action.payload)
+      }
+    case DataActionTypes.CALCULATE_STATS:
+      return{
+        ...state,
+        statData: calculateStatsFromData(state.data)
       }
     default:
       return state;

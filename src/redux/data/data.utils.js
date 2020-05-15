@@ -7,8 +7,7 @@ const selectMonth = (month) => {
 }
 
 const selectCategory = (sys) => {
-  //const catArr = ['hypotension', 'Normal', 'Prehypertension', 'Stage1 Hypertension', 'Stage2 Hypertension'];
-  if (sys <= 90 ) return ['hypotension', 'secondary'];
+  if (sys <= 90 ) return ['Hypotension', 'secondary'];
   if (sys >90 && sys <= 120) return ['Normal', 'primary'];
   if (sys >120 && sys <= 140) return ['Prehypertension', 'success'];
   if (sys >140 && sys <= 160) return ['Stage1 Hypertension', 'warning'];
@@ -37,4 +36,24 @@ export const addItemToData = (dataArr, itemToAdd) => {
 
 export const removeItemFromData = ( dataArr, itemToRemoveId ) => {
   return dataArr.filter(data=> data.id !== itemToRemoveId)
+}
+
+export const calculateStatsFromData = ( dataArr ) => {
+  const avgSys = dataArr.reduce((acc, cur)=> (acc+cur.sys), 0);
+  const avgDia = dataArr.reduce((acc, cur)=> (acc+cur.dia), 0);
+  const avgBpm = dataArr.reduce((acc, cur)=> (acc+cur.bpm), 0);
+
+  const totalNumber = dataArr.length;
+  const hypoNumber = dataArr.filter(data=> data.category === 'Hypotension').length;
+  const norNumber = dataArr.filter(data=> data.category === 'Normal').length;
+  const preNumber = dataArr.filter(data=> data.category === 'Prehypertension').length;
+  const st1Number = dataArr.filter(data=> data.category === 'Stage1 Hypertension').length;
+  const st2Number = dataArr.filter(data=> data.category === 'Stage2 Hypertension').length;
+  const hypoPerc = hypoNumber / totalNumber;
+  const norPerc = norNumber / totalNumber;
+  const prePerc = preNumber / totalNumber;
+  const st1Perc = st1Number / totalNumber;
+  const st2Perc = st2Number / totalNumber;
+
+  return { avgSys, avgDia, avgBpm, hypoPerc, norPerc, prePerc, st1Perc, st2Perc }
 }

@@ -9,3 +9,9 @@ export const removeItem = id => ({
   type: DataActionTypes.REMOVE_ITEM,
   payload: id
 })
+
+export const calculateStats = data => ({
+  type: DataActionTypes.CALCULATE_STATS,
+  payload: data
+})
+
