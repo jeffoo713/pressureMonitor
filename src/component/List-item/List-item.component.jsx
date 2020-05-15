@@ -2,14 +2,14 @@ import React from 'react';
 
 import { ListGroup, Badge } from 'react-bootstrap';
 
-const ListItem = ({sys, dia, bpm, category, colorCode, inputDate}) => (
-  <ListGroup.Item>
+const ListItem = ({ id, sys, dia, bpm, category, colorCode, inputDate, removeData }) => (
+  <ListGroup.Item style={{ marginLeft: '40px', marginRight: '40px'}}>
     <div
       style={{
         height: '25px', 
         display: 'flex',
         alignItems: 'center',
-        paddingLeft: '25px' 
+        justifyContent: 'space-evenly' 
       }}
     >
       <Badge variant={colorCode} style={{ height: '130%' }}>
@@ -19,6 +19,11 @@ const ListItem = ({sys, dia, bpm, category, colorCode, inputDate}) => (
       <h5>{category}</h5>
       <span>{inputDate}&ensp;|&ensp;{bpm} bpm</span>
       </div>
+        <ion-icon 
+        name="trash-outline"
+        style={{ cursor: 'pointer'}}
+        onClick={() => removeData(id)}
+        />
     </div>
   </ListGroup.Item>
 )
