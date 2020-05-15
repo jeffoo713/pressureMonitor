@@ -16,10 +16,8 @@ class HistoryPage extends React.Component {
   
   removeData = (id) => {
     const prevData = this.state.DATA;
-    console.log(prevData)
     const newData = prevData.filter(data=> data.id !== id);
-    console.log(newData)
-    this.setState({ DATA: newData }, ()=> console.log(this.state))
+    this.setState({ DATA: newData })
   }
 
   render() {
