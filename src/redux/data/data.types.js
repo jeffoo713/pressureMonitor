@@ -1,3 +1,3 @@
-export const dataActionTypes = {
-  
+export const DataActionTypes = {
+  ADD_ITEM: 'ADD_ITEM'
 }

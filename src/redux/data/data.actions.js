@@ -1,2 +1,6 @@
-import { dataActionTypes } from './data.types';
+import { DataActionTypes } from './data.types';
 
+export const addItem =(item) => ({
+  type: DataActionTypes.ADD_ITEM,
+  payload: item
+})

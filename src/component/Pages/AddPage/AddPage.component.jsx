@@ -1,6 +1,5 @@
 import React from 'react';
-
-import { v4 as uuidv4 } from 'uuid';
+import { connect } from 'react-redux';
 
 import Bar from '../../Bar/Bar.component';
 import InputLabels from '../../Input-labels/Input-labels.component';
@@ -12,87 +11,54 @@ import CustomButton from '../../Button/Button.component';
 
 import { Col, Form } from 'react-bootstrap';
 
+import { returnItem } from '../../../redux/data/data.utils';
+
+import { addItem } from '../../../redux/data/data.actions';
+import { toggleCalendar } from '../../../redux/calendar/calendar.actions';
+
 class AddPage extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
       sys: '',
       dia: '',
       bpm: '',
-      date: undefined,
-      data: [],
-      calendarHidden: true
+      date: undefined
     }
-  }
-
-  selectMonth = (month) => {
-    const monthArr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    const monthData = monthArr[month]
-    return monthData
-  }
-
-  selectCategory = (sys) => {
-    //const catArr = ['hypotension', 'Normal', 'Prehypertension', 'Stage1 Hypertension', 'Stage2 Hypertension'];
-    if (sys <= 90 ) return ['hypotension', 'secondary'];
-    if (sys >90 && sys <= 120) return ['Normal', 'primary'];
-    if (sys >120 && sys <= 140) return ['Prehypertension', 'success'];
-    if (sys >140 && sys <= 160) return ['Stage1 Hypertension', 'warning'];
-    if (sys > 160 ) return ['Stage2 Hypertension', 'danger'];
-  }
-
-  storeData = ({ sys, dia, bpm }) => {
-    const id = uuidv4();
-
-    const defautDate = new Date()
-    const dateObj = this.state.date === undefined? defautDate: this.state.date ;
-    const date = dateObj.getDate()
-    const month = this.selectMonth(dateObj.getMonth())
-    const year = dateObj.getYear()+1900
-    
-    const categoryArr = this.selectCategory(sys);
-    const category = categoryArr[0];
-    const colorCode = categoryArr[1];
-
-    const inputDate = `${month} ${date},${year}`
-
-    this.state.data.push({ id, sys, dia, bpm, category, inputDate, colorCode, dateObj });
-
-    this.state.data.sort(((a, b) => b.dateObj - a.dateObj))
-
-    this.setState({
-        sys: '',
-        dia: '',
-        bpm: '',
-        date: undefined
-    }, () => console.log(this.state));
   }
 
   handleSubmit = event => {
     event.preventDefault();
-    const { sys, dia, bpm } = this.state;
-    //function to add the data
-    this.storeData({ sys, dia, bpm });
+    const { sys, dia, bpm, date } = this.state;
+    const itemToAdd = returnItem({ sys, dia, bpm, date })
+
+    this.props.addItem(itemToAdd);
+
+    this.setState({
+      sys: '',
+      dia: '',
+      bpm: '',
+      date: undefined
+    });
   }
 
   handleChange = event => {
     const { name, value } = event.target;
-    if (value > 0) {
+    if (value >= 0 && value <= 200 ) {
       this.setState({ [name]: value });
+    } else {
+      alert('Data should be between 0 and 200')
     }
-  }
-
-  toggleCalendar = () => {
-    this.setState({ calendarHidden: !this.state.calendarHidden })
   }
 
   dateChange = inputDate => {
     this.setState({ date: inputDate });
-    this.toggleCalendar();
+    this.props.toggleCalendar();
   }
 
   render() {
-    const { calendarHidden } = this.state
+    const { toggleCalendar, hiddenCalendar } = this.props;
     return (
       <div style={{ height: '100%' }} >
         <Bar />
@@ -148,8 +114,8 @@ class AddPage extends React.Component {
                 />
               </Col>
             </Form.Group>
-            <CalendarIcon toggleCalendar={this.toggleCalendar} />
-            { calendarHidden? null
+            <CalendarIcon toggleCalendar={toggleCalendar} />
+            { hiddenCalendar? null
               : <div style={{ 
               width: '300px', 
               position: 'absolute', 
@@ -169,4 +135,13 @@ class AddPage extends React.Component {
   }
 }
 
-export default AddPage;
+const mapStateToProps = (state) => ({
+  hiddenCalendar: state.calendar.hiddenCalendar
+});
+
+const mapDispachToProps = dispatch => ({
+  addItem: item => dispatch(addItem(item)),
+  toggleCalendar: () => dispatch(toggleCalendar())
+})
+
+export default connect(mapStateToProps, mapDispachToProps)(AddPage);
