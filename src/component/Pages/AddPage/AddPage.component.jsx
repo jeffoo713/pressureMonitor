@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect'
 
-import Bar from '../../Bar/Bar.component';
 import InputLabels from '../../Input-labels/Input-labels.component';
 import Chart from '../../Chart/Chart.component';
 import CalendarIcon from '../../Calendar/Calendar-icon.component';
@@ -64,16 +63,14 @@ class AddPage extends React.Component {
   render() {
     const { toggleCalendar, hiddenCalendar } = this.props;
     return (
-      <div style={{ height: '100%' }} >
-        <Bar />
+      <div style={{ height: '100%'}}>
         <Container>
           <div
-            className="bg-danger col-12"
             style={{
               paddingTop: '30px',
               paddingBottom: '20px',
               marginBottom: '50px',
-              borderRadius: '7px'
+              border: 'solid 1px'
             }}
           >
             <InputLabels />

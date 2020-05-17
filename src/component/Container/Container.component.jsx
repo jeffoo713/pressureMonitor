@@ -6,6 +6,9 @@ const Container = ({children}) => (
   <Jumbotron
     className='col-8 mx-auto'
     style={{ 
+      display: 'flex',
+      flexDirection: 'column',
+      alignContent: 'center', 
       padding: '40px, 50px',  
       paddingTop: '40px',
       marginTop: '30px',

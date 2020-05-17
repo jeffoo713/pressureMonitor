@@ -4,6 +4,7 @@ import { createStructuredSelector } from 'reselect'
 
 import ListItem from '../../List-item/List-item.component';
 import Container from '../../Container/Container.component';
+import NoData from '../../No-data/No-data.component';
 
 import { ListGroup } from 'react-bootstrap';
 
@@ -13,15 +14,17 @@ import { removeItem, calculateStats } from '../../../redux/data/data.actions';
 const HistoryPage = ({ dataArr, removeItem, calculateStats }) => {
   return (
     <Container >
-      <ListGroup>
-        {
-          dataArr.map((data) => 
-          <ListItem 
-            key={data.id} {...data} 
-            removeData={removeItem} 
-            calculateStats={calculateStats} 
-            dataArr={dataArr} 
-          />)
+      <ListGroup >
+        { 
+          dataArr.length === 0
+          ? <NoData />
+          : dataArr.map((data) => 
+            <ListItem 
+              key={data.id} {...data} 
+              removeData={removeItem} 
+              calculateStats={calculateStats} 
+              dataArr={dataArr} 
+            />)
         }
       </ListGroup>
     </Container>

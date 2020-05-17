@@ -6,7 +6,6 @@ import Nav from 'react-bootstrap/Nav';
 
 const Header = ({ history, match }) => {
   return (
-    <div style={{ width: '100%'}}>
       <Navbar bg="dark" variant="dark">
         <Navbar.Brand 
           onClick={()=> history.push('/')} 
@@ -20,7 +19,6 @@ const Header = ({ history, match }) => {
           <Nav.Link onClick={()=> history.push(`${match.url}statistics`)}>statistics</Nav.Link>
         </Nav>
       </Navbar>
-    </div>
   )
 }
 
