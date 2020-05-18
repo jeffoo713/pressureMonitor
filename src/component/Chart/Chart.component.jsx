@@ -1,6 +1,9 @@
 import React from 'react';
 
-import { Row, Col, ListGroup, Badge } from 'react-bootstrap';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Badge from 'react-bootstrap/Badge';
 
 const Chart = () => {
   const chartBadgeStyle = { width: '60%' }

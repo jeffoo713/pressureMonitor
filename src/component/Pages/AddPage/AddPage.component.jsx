@@ -8,6 +8,7 @@ import CalendarIcon from '../../Calendar/Calendar-icon.component';
 import CalendarForm from '../../Calendar/Calendar.component';
 import Container from '../../Container/Container.component';
 import CustomButton from '../../Button/Button.component';
+import InputField from '../../Input-field/Input-field.component';
 
 import { Col, Form } from 'react-bootstrap';
 
@@ -63,7 +64,7 @@ class AddPage extends React.Component {
   render() {
     const { toggleCalendar, hiddenCalendar } = this.props;
     return (
-      <div style={{ height: '100%'}}>
+      <div>
         <Container>
           <div
             style={{
@@ -74,7 +75,7 @@ class AddPage extends React.Component {
             }}
           >
             <InputLabels />
-            <Form.Group
+            <div
               style={{
                 display: 'flex',
                 justifyContent: 'space-evenly',
@@ -82,39 +83,33 @@ class AddPage extends React.Component {
               }}
             >
               <Col>
-                <Form.Control
-                  size="lg"
+                <InputField
                   placeholder="SYS"
                   type="number"
                   name='sys'
                   value={this.state.sys}
-                  onChange={this.handleChange}
-                  required
+                  handleChange={this.handleChange}
                 />
               </Col>
               <Col>
-                <Form.Control
-                  size="lg"
+                <InputField
                   placeholder="DIA"
                   type="number"
                   name='dia'
                   value={this.state.dia}
-                  onChange={this.handleChange}
-                  required
+                  handleChange={this.handleChange}
                 />
               </Col>
               <Col>
-                <Form.Control
-                  size="lg"
+                <InputField
                   placeholder="BPM"
                   type="number"
                   name='bpm'
                   value={this.state.bpm}
-                  onChange={this.handleChange}
-                  required
+                  handleChange={this.handleChange}
                 />
               </Col>
-            </Form.Group>
+            </div>
             <CalendarIcon toggleCalendar={toggleCalendar} />
             { hiddenCalendar? null
               : <div style={{ 

@@ -6,7 +6,7 @@ import ListItem from '../../List-item/List-item.component';
 import Container from '../../Container/Container.component';
 import NoData from '../../No-data/No-data.component';
 
-import { ListGroup } from 'react-bootstrap';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 import { selectDataArr } from '../../../redux/data/data.selectors';
 import { removeItem, calculateStats } from '../../../redux/data/data.actions';
