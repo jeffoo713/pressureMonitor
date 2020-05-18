@@ -10,7 +10,7 @@ import Container from '../../Container/Container.component';
 import CustomButton from '../../Button/Button.component';
 import InputField from '../../Input-field/Input-field.component';
 
-import { Col, Form } from 'react-bootstrap';
+import Col from 'react-bootstrap/Col';
 
 import { returnItem } from '../../../redux/data/data.utils';
 
@@ -120,7 +120,11 @@ class AddPage extends React.Component {
               <CalendarForm dateChange={this.dateChange} value={this.state.date} />
               </div> 
             }
-            <CustomButton handleClick={this.handleSubmit} >
+            <CustomButton 
+              variant="primary"
+              className="col-8 mx-auto"
+              handleClick={this.handleSubmit} 
+            >
               ADD
             </CustomButton>
           </div>

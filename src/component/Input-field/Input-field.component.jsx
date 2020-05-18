@@ -11,6 +11,9 @@ const InputField = ({ placeholder, type, name, value, handleChange }) => (
     value={value}
     onChange={handleChange}
     required
+    style={{
+      marginBottom: '10px'
+    }}
   />
 )
 

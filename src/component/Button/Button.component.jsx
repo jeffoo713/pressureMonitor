@@ -2,10 +2,10 @@ import React from 'react';
 
 import Button from 'react-bootstrap/Button';
 
-const CustomButton = ({children, handleClick}) => (
+const CustomButton = ({children, variant, className, handleClick}) => (
   <Button
-    variant="primary"
-    className="col-8 mx-auto"
+    variant={variant}
+    className={className}
     style={{ marginTop: '10px' }}
     onClick={handleClick}
   >
