@@ -20,6 +20,7 @@ class SignUp extends React.Component {
   }
 
   render() {
+    const { buttonStyle } = this.props;
     return(
       <div 
         style={{ 
@@ -68,11 +69,11 @@ class SignUp extends React.Component {
             placeholder='Confirm Password'
           />
           </div>
-          <CustomButton
-            variant="primary"
-          >
-          SIGN UP
-          </CustomButton>
+          <div style={buttonStyle}>
+            <CustomButton
+              variant="primary"
+            >SIGN UP</CustomButton>
+          </div>
       </div>
     )
   }

@@ -3,6 +3,8 @@ import React from 'react';
 import InputField from '../../component/Input-field/Input-field.component';
 import CustomButton from '../../component/Button/Button.component';
 
+import { signInWithGoogle } from '../../firebase/firebase.utils';
+
 class SignIn extends React.Component {
   constructor() {
     super()
@@ -18,6 +20,7 @@ class SignIn extends React.Component {
   }
 
   render() {
+    const { buttonStyle } = this.props;
     return(
       <div 
         style={{ 
@@ -28,7 +31,7 @@ class SignIn extends React.Component {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'space-evenly',
-      }}
+        }}
       >
         <h4>Sign In</h4>
 
@@ -52,10 +55,7 @@ class SignIn extends React.Component {
             placeholder='Password'
           />
           </div>
-          <div style={{ 
-              display: 'flex',
-              alignItems: 'space-between'
-            }}
+          <div style={buttonStyle}
           >
             <CustomButton
               variant="primary"
@@ -63,6 +63,7 @@ class SignIn extends React.Component {
             </CustomButton>
             <CustomButton
               variant="outline-primary"
+              handleClick={signInWithGoogle}
             >
             GOOGLE SIGN IN
             </CustomButton>

@@ -1,11 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { createStructuredSelector } from 'reselect'
+import { compose } from 'redux';
 
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Form from 'react-bootstrap/Form'
 
-const Header = ({ history, match }) => {
+import { auth } from '../../firebase/firebase.utils';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
+
+const Header = ({ history, match, currentUser }) => {
   return (
       <Navbar className="bg-light justify-content-between">
         <Form inline>
@@ -21,11 +27,23 @@ const Header = ({ history, match }) => {
             <Nav.Link onClick={()=> history.push(`${match.url}add`)}>ADD</Nav.Link>
             <Nav.Link onClick={()=> history.push(`${match.url}history`)}>HISTORY</Nav.Link>
             <Nav.Link onClick={()=> history.push(`${match.url}statistics`)}>STATISTICS</Nav.Link>
-            <Nav.Link onClick={()=> history.push(`${match.url}signinandup`)}>SIGN IN</Nav.Link>
+            {
+              currentUser?
+              <Nav.Link onClick={()=> auth.signOut()}>SIGN OUT</Nav.Link>
+              :
+              <Nav.Link onClick={()=> history.push(`${match.url}signinandup`)}>SIGN IN</Nav.Link>
+            }
           </Nav>
         </Form>
       </Navbar>
   )
 }
 
-export default withRouter(Header);
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
+})
+
+export default compose(
+  withRouter,
+  connect(mapStateToProps)
+)(Header);

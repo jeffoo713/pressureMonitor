@@ -1,19 +1,49 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import { createStructuredSelector } from 'reselect';
+import { connect } from 'react-redux'
+import { compose } from 'redux';
 
-import Container from '../../Container/Container.component';
-import Chart from '../../Chart/Chart.component';
 import CustomButton from '../../Button/Button.component';
 
-const HomePage = ({ history, match }) => {
-  const toAddPage = () => ( history.push(`${match.url}add`))
+import { selectCurrentUser } from '../../../redux/user/user.selectors';
+
+const HomePage = ({ history, match, currentUser }) => {
+  const toAddPage = () => history.push(`${match.url}add`);
+  const toSignIn = () => history.push(`${match.url}signinandup`);
   return(
-  <Container>
-    <Chart/>
-    <div style={{ marginTop: '20px'}}>
-      <CustomButton handleClick={toAddPage} >START TO ADD</CustomButton>
+    <div
+      style={{ 
+        width: '30vw',
+        height: '60vh',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+      }}
+    >
+      <h3>JEFF's BLOOD PRESSURE MONITOR</h3>
+      <div style={{ marginTop: '20px'}}>
+      {
+        currentUser?
+        <CustomButton handleClick={toAddPage} > START TO ADD </CustomButton>
+        :
+        <div style={{ display: 'flex', flexDirection: 'column'}}>
+          <CustomButton handleClick={toAddPage}> START WITHOUT ACCOUNT </CustomButton>
+          <CustomButton variant="outline-primary" handleClick={toSignIn} > START WITH SIGN IN </CustomButton>
+        </div>
+      }
+      </div>
     </div>
-  </Container>
 )};
 
-export default withRouter(HomePage);
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
+})
+
+export default compose(
+  withRouter,
+  connect(mapStateToProps)
+)(HomePage);

@@ -13,8 +13,38 @@ const myOwnConfig = {
   measurementId: "G-XCM5Y3CSHV"
 };
 
+export const createUserProfileDocument = async (userAuth, addtionalData) => {
+  if (!userAuth) return;
+
+  const userRef = firestore.doc(`users/${userAuth.uid}`);
+  const snapShot = await userRef.get();
+  //const collectionRef = firestore.collection('users');
+  if(!snapShot.exists) {
+    const { displayName, email } = userAuth
+    const createdAt = new Date();
+
+    try{
+      await userRef.set({
+        displayName,
+        email,
+        createdAt,
+        ...addtionalData
+      })
+    }catch(error) {
+      console.log('error from createUserProfileDocument from firebase.utils', error.message)
+    }
+  }
+  return userRef;
+}
+
 firebase.initializeApp(myOwnConfig);
 
+export const auth = firebase.auth();
+
 export const firestore = firebase.firestore();
+
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
+
+export const signInWithGoogle = () => auth.signInWithPopup(googleProvider); 
 
 export default firebase; 

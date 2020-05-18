@@ -112,11 +112,14 @@ class AddPage extends React.Component {
             </div>
             <CalendarIcon toggleCalendar={toggleCalendar} />
             { hiddenCalendar? null
-              : <div style={{ 
-              width: '300px', 
-              position: 'absolute', 
-              zIndex: '9999' 
-              }}>
+              : 
+              <div 
+                style={{ 
+                width: '300px', 
+                position: 'absolute', 
+                zIndex: '9999' 
+                }}
+              >
               <CalendarForm dateChange={this.dateChange} value={this.state.date} />
               </div> 
             }
