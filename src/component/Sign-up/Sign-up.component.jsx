@@ -2,6 +2,9 @@ import React from 'react';
 
 import InputField from '../../component/Input-field/Input-field.component';
 import CustomButton from '../../component/Button/Button.component';
+import { auth } from '../../firebase/firebase.utils';
+
+import { createUserProfileDocument } from '../../firebase/firebase.utils';
 
 class SignUp extends React.Component {
   constructor() {
@@ -11,6 +14,30 @@ class SignUp extends React.Component {
       displayName:'',
       password:'',
       confirmPassword:''
+    }
+  }
+
+  handleSignUp = async event => {
+    event.preventDefault();
+    const { email, displayName, password, confirmPassword } = this.state;
+
+    if ( password !== confirmPassword) {
+      alert('please confirm the correct password');
+      return;
+    }
+
+    try{
+      const { user } = await auth.createUserWithEmailAndPassword(email, password);
+      await createUserProfileDocument(user, { displayName });
+
+      this.setState({
+        email:'',
+        displayName:'',
+        password:'',
+        confirmPassword:''
+      })
+    } catch(error) {
+      console.log('error from handleSignUp in Sign-up', error.message)
     }
   }
 
@@ -72,6 +99,7 @@ class SignUp extends React.Component {
           <div style={buttonStyle}>
             <CustomButton
               variant="primary"
+              handleClick={this.handleSignUp}
             >SIGN UP</CustomButton>
           </div>
       </div>
