@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { ListGroup, Badge } from 'react-bootstrap';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Badge from 'react-bootstrap/Badge';
 
 const ListItem = ({ id, sys, dia, bpm, category, colorCode, inputDate, removeData, calculateStats, dataArr }) => (
   <ListGroup.Item style={{ marginLeft: '40px', marginRight: '40px'}}>

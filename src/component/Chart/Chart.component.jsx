@@ -1,6 +1,9 @@
 import React from 'react';
 
-import { Row, Col, ListGroup, Badge } from 'react-bootstrap';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Badge from 'react-bootstrap/Badge';
 
 const Chart = () => {
   const chartBadgeStyle = { width: '60%' }
@@ -23,7 +26,7 @@ const Chart = () => {
           <Badge variant="danger" style={chartBadgeStyle}>&nbsp;</Badge>
         </Col>
         <Col>
-          Stgae 2 Hypertension
+          Stage 2 Hypertension
         </Col>
         <Col>&#62; 160</Col>
         <Col>&#62; 100</Col>
@@ -35,7 +38,7 @@ const Chart = () => {
           <Badge variant="warning" style={chartBadgeStyle}>&nbsp;</Badge>
         </Col>
         <Col>
-          Stgae 1 Hypertension
+          Stage 1 Hypertension
         </Col>
         <Col>141-160</Col>
         <Col>91-100</Col>

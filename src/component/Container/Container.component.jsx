@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Jumbotron } from 'react-bootstrap';
+import Jumbotron from 'react-bootstrap/Jumbotron';
 
 const Container = ({children}) => (
   <Jumbotron
