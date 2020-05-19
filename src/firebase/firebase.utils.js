@@ -37,6 +37,27 @@ export const createUserProfileDocument = async (userAuth, addtionalData) => {
   return userRef;
 }
 
+// export const getUserData = async userId => {
+//   const dataRef = firestore.collection('data').where('userId', '==', userId );
+//   const snapshot = await dataRef.get();
+  
+//   if (snapshot.empty) {
+//     console.log(snapshot.empty)
+//     const dataDocRef = firestore.collection('data').doc();
+//     await dataDocRef.set({ userId, dataArray: [] });
+//     const dataSnapshot = await dataDocRef.get()
+//     return dataSnapshot.data();
+
+//   } else {
+
+//     console.log(snapshot.docs[0].ref.id)
+//     const dataDocRef = firestore.doc(`data/${snapshot.docs[0].ref.id}`)
+//     const dataSnapshot = await dataDocRef.get()
+//     console.log(dataSnapshot.data())
+//     return dataSnapshot.data();
+//   }
+// }
+
 firebase.initializeApp(myOwnConfig);
 
 export const auth = firebase.auth();
