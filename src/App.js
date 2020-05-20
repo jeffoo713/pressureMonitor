@@ -10,7 +10,7 @@ import HistoryPage from './component/Pages/HistoryPage/HistoryPage.component';
 import StatisticsPage from './component/Pages/StatisticsPage/Statistics.component';
 import SignInAndUp from './component/Pages/Sign-in-and-upPage/Sign-in-and-up.component';
 
-import { checkCurrentUser } from './redux/user/user.actions';
+import { checkCurrentUser } from './redux/user/user.action-creaters';
 import { selectCurrentUser } from './redux/user/user.selectors';
 
 import './App.scss';

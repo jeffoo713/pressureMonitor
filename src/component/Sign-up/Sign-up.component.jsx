@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import InputField from '../../component/Input-field/Input-field.component';
 import CustomButton from '../../component/Button/Button.component';
 
-import { signUpStart } from '../../redux/user/user.actions';
+import { signUpStart } from '../../redux/user/user.action-creaters';
 
 class SignUp extends React.Component {
   constructor() {

@@ -1,4 +1,4 @@
-import { DataActionTypes } from './data.types';
+import DataActionTypes from './data.action-types';
 
 import { 
   addItemToData, 
@@ -18,11 +18,23 @@ const INITIAL_VALUE = {
     prePerc: '',
     st1Perc: '',
     st2Perc: ''
-  }
+  },
+  error: null
 };
 
 const dataReducer = (state=INITIAL_VALUE, action) => {
   switch(action.type) {
+    case DataActionTypes.GET_USER_DATA_SUCCESS:
+      return{
+        ...state,
+        data: action.payload,
+        error: null
+      }
+    case DataActionTypes.GET_USER_DATA_FAILURE:
+      return{
+        ...state,
+        error: action.payload
+      }
     case DataActionTypes.ADD_ITEM:
       return {
         ...state,

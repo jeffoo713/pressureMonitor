@@ -9,7 +9,7 @@ import NoData from '../../No-data/No-data.component';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 import { selectDataArr } from '../../../redux/data/data.selectors';
-import { removeItem, calculateStats } from '../../../redux/data/data.actions';
+import { removeItem, calculateStats } from '../../../redux/data/data.action-creaters';
 
 const HistoryPage = ({ dataArr, removeItem, calculateStats }) => {
   return (

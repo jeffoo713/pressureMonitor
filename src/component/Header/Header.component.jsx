@@ -9,7 +9,7 @@ import Nav from 'react-bootstrap/Nav';
 import Form from 'react-bootstrap/Form'
 
 import { selectCurrentUser } from '../../redux/user/user.selectors';
-import { signOutStart } from '../../redux/user/user.actions';
+import { signOutStart } from '../../redux/user/user.action-creaters';
 
 const Header = ({ history, match, currentUser, signOutStart }) => {
   return (
