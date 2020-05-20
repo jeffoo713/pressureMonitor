@@ -1,13 +1,13 @@
 import { takeLatest, put, all, call } from 'redux-saga/effects';
 
-import { UserActionTypes } from './user.types';
+import UserActionTypes from './user.types';
 
 import { signInFailure, signInSuccess, signOutSuccess, signOutFailure, signUpSuccess, signUpFailure } from './user.actions';
-import { auth, googleProvider, createUserProfileDocument } from '../../firebase/firebase.utils';
+import { auth, googleProvider, createUserProfileDocument, getCurrentUser } from '../../firebase/firebase.utils';
 
 export function* getUserState(userAuth, additionalData) {
   try{
-    const userRef = yield createUserProfileDocument(userAuth);
+    const userRef = yield call(createUserProfileDocument, userAuth);
     const snapshot = yield userRef.get();
     const userState = { id:snapshot.id, ...snapshot.data(), ...additionalData }
     return userState
@@ -56,6 +56,17 @@ export function* signUp({ payload: {email, password, displayName} }) {
   }
 }
 
+export function* checkCurrentUser() {
+  try{
+    const userAuth = yield getCurrentUser()
+    if(!userAuth) return;
+    const userState = yield getUserState(userAuth);
+    yield put(signInSuccess(userState))
+  } catch(error) {
+    yield put(signInFailure(error.message))
+  }
+}
+
 export function* onGoogleSignInStart() {
   yield takeLatest(UserActionTypes.GOOGLE_SIGN_IN_START, signInWithGoogle)
 }
@@ -72,11 +83,16 @@ export function* onSignUp() {
   yield takeLatest(UserActionTypes.SIGN_UP_START, signUp)
 }
 
+export function* onCheckCurrentUser() {
+  yield takeLatest(UserActionTypes.CHECK_CURRENT_USER, checkCurrentUser)
+}
+
 export function* userSagas() {
   yield all([
     call(onGoogleSignInStart),
     call(onEmailSignInStart),
     call(onSignOut),
-    call(onSignUp)
+    call(onSignUp),
+    call(onCheckCurrentUser)
   ]);
 }

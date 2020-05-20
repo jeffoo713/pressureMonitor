@@ -10,8 +10,7 @@ import HistoryPage from './component/Pages/HistoryPage/HistoryPage.component';
 import StatisticsPage from './component/Pages/StatisticsPage/Statistics.component';
 import SignInAndUp from './component/Pages/Sign-in-and-upPage/Sign-in-and-up.component';
 
-import { auth, createUserProfileDocument } from './firebase/firebase.utils';
-import { updateCurrentUser } from './redux/user/user.actions';
+import { checkCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
 
 import './App.scss';
@@ -21,30 +20,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component {
 
-  unsubscribeFromAuth = null;
-
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-        userRef.onSnapshot(snapshot => {
-          this.props.updateCurrentUser({
-            id: snapshot.id, 
-            ...snapshot.data()
-          })
-        })
-        
-      } else {
-        this.props.updateCurrentUser(userAuth)
-      }
-      
-    })
-    
-    
-  }
-
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
+    const { checkCurrentUser } = this.props;
+    checkCurrentUser();
   }
 
   render() {
@@ -69,7 +47,7 @@ const mapStateToProps = createStructuredSelector({
 })
 
 const mapDispatchToProps = dispatch => ({
-  updateCurrentUser: userAuth => dispatch(updateCurrentUser(userAuth))
+  checkCurrentUser: () => dispatch(checkCurrentUser())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
