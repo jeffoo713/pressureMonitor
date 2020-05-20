@@ -37,6 +37,19 @@ export const createUserProfileDocument = async (userAuth, addtionalData) => {
   return userRef;
 }
 
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged(userAuth => {
+      unsubscribe();
+      if(userAuth) {
+        resolve(userAuth);
+      } else {
+        reject('error from getCurrentUser in firebase.utils ')
+      }
+    })
+  })
+}
+
 // export const getUserData = async userId => {
 //   const dataRef = firestore.collection('data').where('userId', '==', userId );
 //   const snapshot = await dataRef.get();

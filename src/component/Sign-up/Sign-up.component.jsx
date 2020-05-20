@@ -18,14 +18,15 @@ class SignUp extends React.Component {
   }
 
   handleSignUp = async event => {
-    event.preventDefault();
+    const { signUpStart } = this.props;
     const { email, displayName, password, confirmPassword } = this.state;
+    event.preventDefault();
 
     if ( password !== confirmPassword) {
       alert('please confirm the correct password');
       return;
     }
-    this.props.signUpStart(email, password, displayName)
+    signUpStart(email, password, displayName)
 
     this.setState({
       email:'',

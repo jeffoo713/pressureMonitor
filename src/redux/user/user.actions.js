@@ -1,4 +1,4 @@
-import { UserActionTypes } from './user.types';;
+import UserActionTypes from './user.types';;
 
 export const updateCurrentUser = userAuth => ({
   type: UserActionTypes.UPDATE_CURRENT_USER,
@@ -49,4 +49,8 @@ export const signUpSuccess = () => ({
 export const signUpFailure = error => ({
   type: UserActionTypes.SIGN_UP_FAILURE,
   payload: error
+})
+
+export const checkCurrentUser = () => ({
+  type: UserActionTypes.CHECK_CURRENT_USER
 })
