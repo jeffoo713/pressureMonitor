@@ -1,4 +1,4 @@
-import UserActionTypes from './user.types';;
+import UserActionTypes from './user.action-types';;
 
 export const updateCurrentUser = userAuth => ({
   type: UserActionTypes.UPDATE_CURRENT_USER,

@@ -14,7 +14,7 @@ import Col from 'react-bootstrap/Col';
 
 import { returnItem } from '../../../redux/data/data.utils';
 
-import { addItem, calculateStats } from '../../../redux/data/data.actions';
+import { addItem, calculateStats } from '../../../redux/data/data.action-creaters';
 import { toggleCalendar } from '../../../redux/calendar/calendar.actions';
 import { selectHiddenCalendar } from '../../../redux/calendar/calendar.selectors';
 import { selectDataArr } from '../../../redux/data/data.selectors';
