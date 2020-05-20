@@ -10,7 +10,7 @@ import HistoryPage from './component/Pages/HistoryPage/HistoryPage.component';
 import StatisticsPage from './component/Pages/StatisticsPage/Statistics.component';
 import SignInAndUp from './component/Pages/Sign-in-and-upPage/Sign-in-and-up.component';
 
-import { auth, createUserProfileDocument, getUserData } from './firebase/firebase.utils';
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { updateCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
 
@@ -33,8 +33,6 @@ class App extends React.Component {
             ...snapshot.data()
           })
         })
-        //console.log( this.props.currentUser);
-
         
       } else {
         this.props.updateCurrentUser(userAuth)
