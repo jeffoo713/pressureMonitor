@@ -8,10 +8,10 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Form from 'react-bootstrap/Form'
 
-import { auth } from '../../firebase/firebase.utils';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
+import { signOutStart } from '../../redux/user/user.actions';
 
-const Header = ({ history, match, currentUser }) => {
+const Header = ({ history, match, currentUser, signOutStart }) => {
   return (
       <Navbar className="bg-light justify-content-between">
         <Form inline>
@@ -29,7 +29,7 @@ const Header = ({ history, match, currentUser }) => {
             <Nav.Link onClick={()=> history.push(`${match.url}statistics`)}>STATISTICS</Nav.Link>
             {
               currentUser?
-              <Nav.Link onClick={()=> auth.signOut()}>SIGN OUT</Nav.Link>
+              <Nav.Link onClick={signOutStart}>SIGN OUT</Nav.Link>
               :
               <Nav.Link onClick={()=> history.push(`${match.url}signinandup`)}>SIGN IN</Nav.Link>
             }
@@ -43,7 +43,11 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser
 })
 
+const mapDispatchToProps = dispatch => ({
+  signOutStart: () => dispatch(signOutStart())
+})
+
 export default compose(
   withRouter,
-  connect(mapStateToProps)
+  connect(mapStateToProps, mapDispatchToProps)
 )(Header);
