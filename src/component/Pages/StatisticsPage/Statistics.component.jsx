@@ -12,7 +12,7 @@ import { selectStatData } from '../../../redux/data/data.selectors';
 const StatisticsPage = ({ statData }) => (
   <Container>
     {
-      isNaN(statData.avgSys) || statData.avgSys === null
+      isNaN(statData.avgSys) || statData.avgSys === null || statData.avgSys === ''
       ? <NoData />
       : <div>
         <div style={{ display: 'flex', justifyContent: 'space-evenly'}}>
