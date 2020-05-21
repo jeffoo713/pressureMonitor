@@ -66,6 +66,31 @@ export const getUserDataFromFirestore = async userId => {
   }
 }
 
+
+export const getCurrentUserDataDocRef = async ( currentUser) => {
+  const { id } = currentUser;
+  const dataRef = firestore.collection('data').where('userId', '==', id );
+  const snapshot = await dataRef.get();
+  return firestore.doc(`data/${snapshot.docs[0].id}`);
+}
+
+export const addDataItemInFirestore = async ( item, currentUser ) => {
+  const dataDocRef = await getCurrentUserDataDocRef(currentUser)
+  const dataSnapshot = await dataDocRef.get();
+  const dataArray = dataSnapshot.data().dataArray;
+  dataArray.push(item);
+  dataArray.sort(((a, b) => b.dateObj - a.dateObj));
+  await dataDocRef.update({ dataArray });
+}
+
+export const removeDataItemInFirestore = async ( itemToRemoveId, currentUser ) => {
+  const dataDocRef = await getCurrentUserDataDocRef(currentUser)
+  const dataSnapshot = await dataDocRef.get();
+  const dataArray = dataSnapshot.data().dataArray;
+  const newDataArray = dataArray.filter( data=> data.id !== itemToRemoveId )
+  await dataDocRef.update({ dataArray: newDataArray });
+}
+
 firebase.initializeApp(myOwnConfig);
 
 export const auth = firebase.auth();

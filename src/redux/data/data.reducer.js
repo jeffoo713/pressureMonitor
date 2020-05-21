@@ -1,11 +1,5 @@
 import DataActionTypes from './data.action-types';
-
-import { 
-  addItemToData, 
-  removeItemFromData, 
-  calculateStatsFromData 
-} from './data.utils';
-
+import UserActionTypes from '../user/user.action-types';
 
 const INITIAL_VALUE = {
   data: [],
@@ -25,30 +19,28 @@ const INITIAL_VALUE = {
 const dataReducer = (state=INITIAL_VALUE, action) => {
   switch(action.type) {
     case DataActionTypes.GET_USER_DATA_SUCCESS:
+    case DataActionTypes.ADD_DATA_SUCCESS:
+    case DataActionTypes.REMOVE_DATA_SUCCESS:
       return{
         ...state,
         data: action.payload,
         error: null
       }
     case DataActionTypes.GET_USER_DATA_FAILURE:
+    case DataActionTypes.ADD_DATA_FAILURE:
+    case DataActionTypes.REMOVE_DATA_FAILURE:
       return{
         ...state,
         error: action.payload
       }
-    case DataActionTypes.ADD_ITEM:
-      return {
-        ...state,
-        data: addItemToData(state.data, action.payload)
-      }
-    case DataActionTypes.REMOVE_ITEM:
+    case DataActionTypes.CALCULATE_STATS_SUCCESS:
       return{
         ...state,
-        data: removeItemFromData(state.data, action.payload)
+        statData: action.payload
       }
-    case DataActionTypes.CALCULATE_STATS:
+    case UserActionTypes.SIGN_OUT_SUCCESS:
       return{
-        ...state,
-        statData: calculateStatsFromData(state.data)
+        ...INITIAL_VALUE
       }
     default:
       return state;
