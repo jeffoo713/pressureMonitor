@@ -14,10 +14,10 @@ import Col from 'react-bootstrap/Col';
 
 import { returnItem } from '../../../redux/data/data.utils';
 
-import { addItem, calculateStats } from '../../../redux/data/data.action-creaters';
+import { addDataStart } from '../../../redux/data/data.action-creaters';
 import { toggleCalendar } from '../../../redux/calendar/calendar.actions';
 import { selectHiddenCalendar } from '../../../redux/calendar/calendar.selectors';
-import { selectDataArr } from '../../../redux/data/data.selectors';
+import { selectCurrentUser } from '../../../redux/user/user.selectors';
 
 class AddPage extends React.Component {
   constructor(props) {
@@ -33,12 +33,11 @@ class AddPage extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    const { addDataStart, currentUser } = this.props
     const { sys, dia, bpm, date } = this.state;
     const itemToAdd = returnItem({ sys, dia, bpm, date })
-
-    this.props.addItem(itemToAdd);
-    this.props.calculateStats(this.props.dataArr);
-
+    
+    addDataStart(itemToAdd, currentUser);
     this.setState({
       sys: '',
       dia: '',
@@ -139,14 +138,13 @@ class AddPage extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  hiddenCalendar: selectHiddenCalendar,
-  dataArr: selectDataArr
+  currentUser: selectCurrentUser,
+  hiddenCalendar: selectHiddenCalendar
 });
 
 const mapDispachToProps = dispatch => ({
-  addItem: item => dispatch(addItem(item)),
-  calculateStats: dataArr => dispatch(calculateStats(dataArr)),
-  toggleCalendar: () => dispatch(toggleCalendar())
+  toggleCalendar: () => dispatch(toggleCalendar()),
+  addDataStart: ( item, currentUser ) => dispatch(addDataStart( item, currentUser ))
 })
 
 export default connect(mapStateToProps, mapDispachToProps)(AddPage);

@@ -9,9 +9,8 @@ import NoData from '../../No-data/No-data.component';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 import { selectDataArr } from '../../../redux/data/data.selectors';
-import { removeItem, calculateStats } from '../../../redux/data/data.action-creaters';
 
-const HistoryPage = ({ dataArr, removeItem, calculateStats }) => {
+const HistoryPage = ({ dataArr }) => {
   return (
     <Container >
       <ListGroup >
@@ -20,10 +19,8 @@ const HistoryPage = ({ dataArr, removeItem, calculateStats }) => {
           ? <NoData />
           : dataArr.map((data) => 
             <ListItem 
-              key={data.id} {...data} 
-              removeData={removeItem} 
-              calculateStats={calculateStats} 
-              dataArr={dataArr} 
+              key={data.id} 
+              {...data} 
             />)
         }
       </ListGroup>
@@ -35,9 +32,4 @@ const mapStateToProps = createStructuredSelector({
   dataArr: selectDataArr
 })
 
-const mapDispatchToProps = dispatch => ({
-  removeItem: id => dispatch(removeItem(id)),
-  calculateStats: dataArr => dispatch(calculateStats(dataArr))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(HistoryPage);
+export default connect(mapStateToProps)(HistoryPage);

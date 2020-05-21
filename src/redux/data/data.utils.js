@@ -29,15 +29,6 @@ export const returnItem = ({ sys, dia, bpm, date }) => {
   return { id, sys: Number(sys), dia: Number(dia), bpm: Number(bpm), category, inputDate, colorCode, dateObj };
 }
 
-export const addItemToData = (dataArr, itemToAdd) => {
-  dataArr.push(itemToAdd);
-  return dataArr.sort(((a, b) => b.dateObj - a.dateObj));
-}
-
-export const removeItemFromData = ( dataArr, itemToRemoveId ) => {
-  return dataArr.filter(data=> data.id !== itemToRemoveId)
-}
-
 export const calculateStatsFromData = dataArr => {
   const totalNumber = dataArr.length;
   

@@ -1,9 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect'
 
 import ListGroup from 'react-bootstrap/ListGroup';
 import Badge from 'react-bootstrap/Badge';
 
-const ListItem = ({ id, sys, dia, bpm, category, colorCode, inputDate, removeData, calculateStats, dataArr }) => (
+import { selectCurrentUser } from '../../redux/user/user.selectors';
+import { removeDataStart } from '../../redux/data/data.action-creaters';
+
+const ListItem = ({ id, sys, dia, bpm, category, colorCode, inputDate, removeDataStart, currentUser }) => (
   <ListGroup.Item style={{ marginLeft: '40px', marginRight: '40px'}}>
     <div
       style={{
@@ -23,13 +28,18 @@ const ListItem = ({ id, sys, dia, bpm, category, colorCode, inputDate, removeDat
         <ion-icon 
         name="trash-outline"
         style={{ cursor: 'pointer'}}
-        onClick={() => {
-          removeData(id)
-          calculateStats(dataArr)
-        }}
+        onClick={() => removeDataStart(id, currentUser)}
         />
     </div>
   </ListGroup.Item>
 )
 
-export default ListItem;
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
+})
+
+const mapDispatchToProps = dispatch => ({
+  removeDataStart: (id, user) => dispatch(removeDataStart(id, user))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListItem);
