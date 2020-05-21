@@ -2,6 +2,8 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 
+import { calculateStatsFromData, insertAndSortDataArray, compareByTimeStamp } from '../redux/data/data.utils';
+
 const myOwnConfig = {
   apiKey: "AIzaSyAtwo3vmv1GMA8Myxnr1oiYoHKQOqcGvrk",
   authDomain: "pressuremonitor-ec90c.firebaseapp.com",
@@ -66,6 +68,12 @@ export const getUserDataFromFirestore = async userId => {
   }
 }
 
+export const calculateStats = dataArray => {
+  return new Promise((resolve) => {
+    const calculatedDataArray = calculateStatsFromData(dataArray);
+    resolve(calculatedDataArray)
+  })
+}
 
 export const getCurrentUserDataDocRef = async ( currentUser) => {
   const { id } = currentUser;
@@ -74,19 +82,14 @@ export const getCurrentUserDataDocRef = async ( currentUser) => {
   return firestore.doc(`data/${snapshot.docs[0].id}`);
 }
 
-export const addDataItemInFirestore = async ( item, currentUser ) => {
+export const addDataItemInFirestore = async ( item, currentUser, dataArray ) => {
   const dataDocRef = await getCurrentUserDataDocRef(currentUser)
-  const dataSnapshot = await dataDocRef.get();
-  const dataArray = dataSnapshot.data().dataArray;
-  dataArray.push(item);
-  dataArray.sort(((a, b) => b.dateObj - a.dateObj));
-  await dataDocRef.update({ dataArray });
+  const newDataArray = insertAndSortDataArray(dataArray, item, compareByTimeStamp);
+  await dataDocRef.update({ dataArray: newDataArray });
 }
 
-export const removeDataItemInFirestore = async ( itemToRemoveId, currentUser ) => {
+export const removeDataItemInFirestore = async ( itemToRemoveId, currentUser, dataArray ) => {
   const dataDocRef = await getCurrentUserDataDocRef(currentUser)
-  const dataSnapshot = await dataDocRef.get();
-  const dataArray = dataSnapshot.data().dataArray;
   const newDataArray = dataArray.filter( data=> data.id !== itemToRemoveId )
   await dataDocRef.update({ dataArray: newDataArray });
 }

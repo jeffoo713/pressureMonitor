@@ -1,3 +1,6 @@
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+
 import { v4 as uuidv4 } from 'uuid';
 
 const selectMonth = (month) => {
@@ -19,14 +22,13 @@ export const returnItem = ({ sys, dia, bpm, date }) => {
 
   const defautDate = new Date()
   const dateObj = date === undefined? defautDate: date ;
-  
+  const timeStamp = firebase.firestore.Timestamp.fromDate(dateObj);
   const categoryArr = selectCategory(sys);
   const category = categoryArr[0];
   const colorCode = categoryArr[1];
-
   const inputDate = `${selectMonth(dateObj.getMonth())} ${dateObj.getDate()},${dateObj.getYear()+1900}`
 
-  return { id, sys: Number(sys), dia: Number(dia), bpm: Number(bpm), category, inputDate, colorCode, dateObj };
+  return { id, sys: Number(sys), dia: Number(dia), bpm: Number(bpm), category, inputDate, colorCode, timeStamp };
 }
 
 export const calculateStatsFromData = dataArr => {
@@ -54,3 +56,11 @@ export const calculateStatsFromData = dataArr => {
     totalNumber 
   }
 }
+
+export const insertAndSortDataArray = (dataArray, item, comparator) => {
+  for (var i = 0; i < dataArray.length && comparator(dataArray[i], item) > 0; i++) {}
+  dataArray.splice(i, 0, item)
+  return dataArray
+}
+
+export const compareByTimeStamp = (a, b) => a.timeStamp.seconds - b.timeStamp.seconds;

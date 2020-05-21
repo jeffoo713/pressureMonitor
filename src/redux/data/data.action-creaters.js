@@ -10,9 +10,9 @@ export const getUserDataFailure = error => ({
   payload: error
 });
 
-export const addDataStart = (item, user) => ({
+export const addDataStart = (item, user, dataArray) => ({
   type: DataActionTypes.ADD_DATA_START,
-  payload: [item, user]
+  payload: [item, user, dataArray]
 });
 
 export const addDataSuccess = dataArray => ({
@@ -25,9 +25,9 @@ export const addDataFailure = error => ({
   payload: error
 });
 
-export const removeDataStart = (itemToRemoveId, user) => ({
+export const removeDataStart = (itemToRemoveId, user, dataArray) => ({
   type: DataActionTypes.REMOVE_DATA_START,
-  payload: [itemToRemoveId, user]
+  payload: [itemToRemoveId, user, dataArray]
 });
 
 export const removeDataSuccess = dataArray => ({

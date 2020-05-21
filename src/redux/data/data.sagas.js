@@ -16,9 +16,9 @@ import {
 import { 
   getUserDataFromFirestore, 
   addDataItemInFirestore, 
-  removeDataItemInFirestore 
+  removeDataItemInFirestore,
+  calculateStats 
 } from '../../firebase/firebase.utils';
-import { calculateStatsFromData } from '../data/data.utils';
 
 export function* getUserData({ payload: { id } }) {
   try{
@@ -29,9 +29,9 @@ export function* getUserData({ payload: { id } }) {
   }
 }
 
-export function* addDataItem({payload: [item, user]}) {
+export function* addDataItem({payload: [item, user, dataArray]}) {
   try{
-    yield call(addDataItemInFirestore, item, user);
+    yield call(addDataItemInFirestore, item, user, dataArray);
     const data = yield call(getUserDataFromFirestore, user.id);
     yield put(addDataSuccess(data.dataArray))
   } catch(error) {
@@ -39,9 +39,9 @@ export function* addDataItem({payload: [item, user]}) {
   }
 }
 
-export function* removeDataItem({payload: [id, user]}) {
+export function* removeDataItem({payload: [id, user, dataArray]}) {
   try{
-    yield call(removeDataItemInFirestore, id, user)
+    yield call(removeDataItemInFirestore, id, user, dataArray)
     const data = yield call(getUserDataFromFirestore, user.id);
     yield put(removeDataSuccess(data.dataArray))
   } catch(error) {
@@ -49,9 +49,8 @@ export function* removeDataItem({payload: [id, user]}) {
   }
 }
 
-export function* calculateStats(dataArray) {
-  yield console.log(dataArray.payload)
-  const statData = yield call(calculateStatsFromData, dataArray.payload);
+export function* getCalculatedStats(dataArray) {
+  const statData = yield call(calculateStats, dataArray.payload);
   yield put(calculateStatsSuccess(statData))
 }
 
@@ -72,7 +71,7 @@ export function* onDataUpdate() {
     DataActionTypes.ADD_DATA_SUCCESS,
     DataActionTypes.REMOVE_DATA_SUCCESS,
     DataActionTypes.GET_USER_DATA_SUCCESS,
-  ], calculateStats)
+  ], getCalculatedStats)
 }
 
 export function* dataSaga() {
