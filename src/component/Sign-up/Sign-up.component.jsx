@@ -72,7 +72,7 @@ class SignUp extends React.Component {
           <InputField 
             name='displayName' 
             type='text' 
-            value={this.state.displayNamed}
+            value={this.state.displayName}
             handleChange={this.handleChange}
             placeholder='Display Name'
           />
