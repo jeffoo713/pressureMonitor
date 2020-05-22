@@ -10,23 +10,21 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 import { selectDataArr } from '../../../redux/data/data.selectors';
 
-const HistoryPage = ({ dataArr }) => {
-  return (
-    <Container >
-      <ListGroup >
-        { 
-          dataArr.length === 0
-          ? <NoData />
-          : dataArr.map((data) => 
-            <ListItem 
-              key={data.id} 
-              {...data} 
-            />)
-        }
-      </ListGroup>
-    </Container>
-  )
-}
+const HistoryPage = ({ dataArr }) => (
+  <Container >
+    <ListGroup >
+      { 
+        dataArr.length === 0? 
+        <NoData />
+        : 
+        dataArr.map((data) => 
+          <ListItem key={data.id} {...data}/>
+        )
+      }
+    </ListGroup>
+  </Container>
+)
+
 
 const mapStateToProps = createStructuredSelector({
   dataArr: selectDataArr

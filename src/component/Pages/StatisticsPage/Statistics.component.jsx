@@ -12,16 +12,17 @@ import { selectStatData } from '../../../redux/data/data.selectors';
 const StatisticsPage = ({ statData }) => (
   <Container>
     {
-      isNaN(statData.avgSys) || statData.avgSys === null || statData.avgSys === ''
-      ? <NoData />
-      : <div>
+      isNaN(statData.avgSys) || statData.avgSys === null || statData.avgSys === '' ? 
+      <NoData />
+      : 
+      <div>
         <div style={{ display: 'flex', justifyContent: 'space-evenly'}}>
         <MeasurementGauge value={statData.avgSys} label='AVG.SYS' color={'#FF6384'} />
         <MeasurementGauge value={statData.avgDia} label='AVG.DIA' color={'#36A2EB'} />
         <MeasurementGauge value={statData.avgBpm} label='AVG.BPM' color={'#FFCE56'} />
         </div>
         <StatChart {...statData} />
-        </div>
+      </div>
     }
     
   </Container>

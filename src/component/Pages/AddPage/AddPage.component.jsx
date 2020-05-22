@@ -34,11 +34,11 @@ class AddPage extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    const { addDataStart, currentUser, currentDataArray } = this.props
+    const { addDataStart, currentUser, dataArray } = this.props
     const { sys, dia, bpm, date } = this.state;
     const itemToAdd = returnItem({ sys, dia, bpm, date })
     
-    addDataStart(itemToAdd, currentUser, currentDataArray);
+    addDataStart(itemToAdd, currentUser, dataArray);
     this.setState({
       sys: '',
       dia: '',
@@ -49,11 +49,9 @@ class AddPage extends React.Component {
 
   handleChange = event => {
     const { name, value } = event.target;
-    if (value >= 0 && value <= 200 ) {
-      this.setState({ [name]: value });
-    } else {
-      alert('Data should be between 0 and 200')
-    }
+
+    if (value >= 0 && value <= 200 ) {this.setState({ [name]: value });
+    } else { alert('Data should be between 0 and 200')}
   }
 
   dateChange = inputDate => {
@@ -111,7 +109,8 @@ class AddPage extends React.Component {
               </Col>
             </div>
             <CalendarIcon toggleCalendar={toggleCalendar} />
-            { hiddenCalendar? null
+            { hiddenCalendar?
+              null
               : 
               <div 
                 style={{ 
@@ -120,16 +119,14 @@ class AddPage extends React.Component {
                 zIndex: '9999' 
                 }}
               >
-              <CalendarForm dateChange={this.dateChange} value={this.state.date} />
+                <CalendarForm dateChange={this.dateChange} value={this.state.date} />
               </div> 
             }
             <CustomButton 
               variant="primary"
               className="col-8 mx-auto"
               handleClick={this.handleSubmit} 
-            >
-              ADD
-            </CustomButton>
+            >ADD</CustomButton>
           </div>
           <Chart />
         </Container>
@@ -141,7 +138,7 @@ class AddPage extends React.Component {
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
   hiddenCalendar: selectHiddenCalendar,
-  currentDataArray: selectDataArr
+  dataArray: selectDataArr
 });
 
 const mapDispachToProps = dispatch => ({

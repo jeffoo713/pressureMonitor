@@ -3,13 +3,13 @@ import 'firebase/firestore';
 
 import { v4 as uuidv4 } from 'uuid';
 
-const selectMonth = (month) => {
+const selectMonth = month => {
   const monthArr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  const monthData = monthArr[month]
-  return monthData
+  const monthInEng = monthArr[month]
+  return monthInEng
 }
 
-const selectCategory = (sys) => {
+const selectCategory = sys => {
   if (sys <= 90 ) return ['Hypotension', 'secondary'];
   if (sys >90 && sys <= 120) return ['Normal', 'primary'];
   if (sys >120 && sys <= 140) return ['Prehypertension', 'success'];
@@ -23,12 +23,13 @@ export const returnItem = ({ sys, dia, bpm, date }) => {
   const defautDate = new Date()
   const dateObj = date === undefined? defautDate: date ;
   const timeStamp = firebase.firestore.Timestamp.fromDate(dateObj);
+  const displayDate = `${selectMonth(dateObj.getMonth())} ${dateObj.getDate()},${dateObj.getYear()+1900}`
+
   const categoryArr = selectCategory(sys);
   const category = categoryArr[0];
   const colorCode = categoryArr[1];
-  const inputDate = `${selectMonth(dateObj.getMonth())} ${dateObj.getDate()},${dateObj.getYear()+1900}`
 
-  return { id, sys: Number(sys), dia: Number(dia), bpm: Number(bpm), category, inputDate, colorCode, timeStamp };
+  return { id, sys: Number(sys), dia: Number(dia), bpm: Number(bpm), category, displayDate, colorCode, timeStamp };
 }
 
 export const calculateStatsFromData = dataArr => {

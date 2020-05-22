@@ -36,11 +36,13 @@ const dataReducer = (state=INITIAL_VALUE, action) => {
     case DataActionTypes.CALCULATE_STATS_SUCCESS:
       return{
         ...state,
-        statData: action.payload
+        statData: action.payload,
+        error: null
       }
     case UserActionTypes.SIGN_OUT_SUCCESS:
       return{
-        ...INITIAL_VALUE
+        ...INITIAL_VALUE,
+        error: null
       }
     default:
       return state;

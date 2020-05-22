@@ -18,22 +18,16 @@ class SignUp extends React.Component {
   }
 
   handleSignUp = async event => {
+    event.preventDefault();
     const { signUpStart } = this.props;
     const { email, displayName, password, confirmPassword } = this.state;
-    event.preventDefault();
 
     if ( password !== confirmPassword) {
       alert('please confirm the correct password');
       return;
     }
+    
     signUpStart(email, password, displayName)
-
-    this.setState({
-      email:'',
-      displayName:'',
-      password:'',
-      confirmPassword:''
-    })
   }
 
   handleChange = event => {
@@ -53,15 +47,10 @@ class SignUp extends React.Component {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'space-evenly'
-      }}
+        }}
       >
       <h4>No Account? Sign Up</h4>
-
-        <div
-          style={{
-            width: '70%'
-          }}  
-        >
+        <div style={{width: '70%'}}>
           <InputField
            name='email'
            type='email' 

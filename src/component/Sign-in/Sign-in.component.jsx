@@ -16,9 +16,9 @@ class SignIn extends React.Component {
   }
 
   handleSignIn = async event => {
+    event.preventDefault();
     const { emailSignInStart } = this.props
     const { email, password } = this.state;
-    event.preventDefault();
     emailSignInStart(email, password);
   }
 
@@ -42,12 +42,7 @@ class SignIn extends React.Component {
         }}
       >
         <h4>Sign In</h4>
-
-        <div
-          style={{
-            width: '70%'
-          }}  
-        >
+        <div style={{width: '70%'}}>
           <InputField
            name='email'
            type='email' 
@@ -63,21 +58,16 @@ class SignIn extends React.Component {
             placeholder='Password'
           />
           </div>
-          <div style={buttonStyle}
-          >
+          <div style={buttonStyle}>
             <CustomButton
               variant="primary"
               handleClick={this.handleSignIn}
-            >SIGN IN
-            </CustomButton>
+            >SIGN IN</CustomButton>
             <CustomButton
               variant="outline-primary"
               handleClick={googleSignInStart}
-            >
-            GOOGLE SIGN IN
-            </CustomButton>
+            >GOOGLE SIGN IN</CustomButton>
           </div>
-        
       </div>
     )
   }

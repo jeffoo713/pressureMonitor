@@ -39,9 +39,9 @@ export function* addDataItem({payload: [item, user, dataArray]}) {
   }
 }
 
-export function* removeDataItem({payload: [id, user, dataArray]}) {
+export function* removeDataItem({payload: [itemId, user, dataArray]}) {
   try{
-    yield call(removeDataItemInFirestore, id, user, dataArray)
+    yield call(removeDataItemInFirestore, itemId, user, dataArray)
     const data = yield call(getUserDataFromFirestore, user.id);
     yield put(removeDataSuccess(data.dataArray))
   } catch(error) {
