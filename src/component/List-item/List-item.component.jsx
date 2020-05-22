@@ -6,27 +6,27 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Badge from 'react-bootstrap/Badge';
 import Col from 'react-bootstrap/Col';
 
+
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { selectDataArr } from '../../redux/data/data.selectors';
 import { removeDataStart } from '../../redux/data/data.action-creaters';
 
 const ListItem = ({ id, sys, dia, bpm, category, colorCode, displayDate, removeDataStart, currentUser, currentDataArray }) => (
-  <ListGroup.Item style={{ marginLeft: '40px', marginRight: '40px'}}>
+  <ListGroup.Item>
     <div
       style={{
         height: '25px', 
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-evenly'
+        alignItems: 'center'
       }}
     >
       <Col sm={4}>
-        <Badge variant={colorCode} style={{ height: '100%' }}>
+        <Badge variant={colorCode}>
         <h5>SYS: {sys}&ensp;|&ensp;DIA: {dia}</h5>
         </Badge>
       </Col>
       <Col lg={true}>
-        <div style={{ lineHeight: '0', marginTop: '-7px', marginLeft: '20px' }}>
+        <div style={{ lineHeight: '0', marginTop: '-7px' }}>
         <h5>{category}</h5>
         <span>{displayDate}&ensp;|&ensp;{bpm} bpm</span>
         </div>

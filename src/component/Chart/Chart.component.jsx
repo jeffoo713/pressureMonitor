@@ -14,70 +14,60 @@ const Chart = () => {
    >
     <ListGroup.Item>
       <Row>
-        <Col></Col>
+        <Col sm={2}></Col>
         <Col>TYPE</Col>
-        <Col>SYS</Col>
-        <Col>DIA</Col>
+        <Col sm={2}>SYS</Col>
+        <Col sm={2}>DIA</Col>
       </Row>
     </ListGroup.Item>
     <ListGroup.Item>
       <Row>
-        <Col>
+        <Col sm={2}>
           <Badge variant="danger" style={chartBadgeStyle}>&nbsp;</Badge>
         </Col>
-        <Col>
-          Stage 2 Hypertension
-        </Col>
-        <Col>&#62; 160</Col>
-        <Col>&#62; 100</Col>
+        <Col>Stage2 Hypertension</Col>
+        <Col sm={2}>&#62; 160</Col>
+        <Col sm={2}>&#62; 100</Col>
       </Row>
     </ListGroup.Item>
     <ListGroup.Item>
       <Row>
-        <Col>
+        <Col sm={2}>
           <Badge variant="warning" style={chartBadgeStyle}>&nbsp;</Badge>
         </Col>
-        <Col>
-          Stage 1 Hypertension
-        </Col>
-        <Col>141-160</Col>
-        <Col>91-100</Col>
+        <Col>Stage1 Hypertension</Col>
+        <Col sm={2}>141-160</Col>
+        <Col sm={2}>91-100</Col>
       </Row>
     </ListGroup.Item>
     <ListGroup.Item>
       <Row>
-        <Col>
+        <Col sm={2}>
           <Badge variant="success" style={chartBadgeStyle}>&nbsp;</Badge>
         </Col>
-        <Col>
-          Prehypertension
-        </Col>
-        <Col>121-140</Col>
-        <Col>91-90</Col>
+        <Col>Prehypertension</Col>
+        <Col sm={2}>121-140</Col>
+        <Col sm={2}>91-90</Col>
       </Row>
     </ListGroup.Item>
     <ListGroup.Item>
       <Row>
-        <Col>
+        <Col sm={2}>
           <Badge variant="primary" style={chartBadgeStyle}>&nbsp;</Badge>
         </Col>
-        <Col>
-          Normal
-        </Col>
-        <Col>91-120</Col>
-        <Col>61-80</Col>
+        <Col>Normal</Col>
+        <Col sm={2}>91-120</Col>
+        <Col sm={2}>61-80</Col>
       </Row>
     </ListGroup.Item>
     <ListGroup.Item>
       <Row>
-        <Col>
+        <Col sm={2}>
           <Badge variant="secondary" style={chartBadgeStyle}>&nbsp;</Badge>
         </Col>
-        <Col>
-          Hypotension
-        </Col>
-        <Col>&#60; 90</Col>
-        <Col>&#60; 60</Col>
+        <Col>Hypotension</Col>
+        <Col sm={2}>&#60; 90</Col>
+        <Col sm={2}>&#60; 60</Col>
       </Row>
     </ListGroup.Item>
   </ListGroup>

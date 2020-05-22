@@ -8,11 +8,10 @@ const Container = ({children}) => (
     style={{ 
       display: 'flex',
       flexDirection: 'column',
-      alignContent: 'center', 
-      padding: '40px, 50px',  
-      paddingTop: '40px',
+      alignContent: 'center',
       marginTop: '30px',
-      minHeight: '80vh' 
+      minHeight: '80vh',
+      padding: '2%'
     }}
   >
     {children}
