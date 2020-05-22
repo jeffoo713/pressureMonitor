@@ -9,7 +9,7 @@ import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { selectDataArr } from '../../redux/data/data.selectors';
 import { removeDataStart } from '../../redux/data/data.action-creaters';
 
-const ListItem = ({ id, sys, dia, bpm, category, colorCode, inputDate, removeDataStart, currentUser, currentDataArray }) => (
+const ListItem = ({ id, sys, dia, bpm, category, colorCode, displayDate, removeDataStart, currentUser, currentDataArray }) => (
   <ListGroup.Item style={{ marginLeft: '40px', marginRight: '40px'}}>
     <div
       style={{
@@ -24,7 +24,7 @@ const ListItem = ({ id, sys, dia, bpm, category, colorCode, inputDate, removeDat
       </Badge>
       <div style={{ lineHeight: '0', marginTop: '-7px', marginLeft: '20px' }}>
       <h5>{category}</h5>
-      <span>{inputDate}&ensp;|&ensp;{bpm} bpm</span>
+      <span>{displayDate}&ensp;|&ensp;{bpm} bpm</span>
       </div>
         <ion-icon 
         name="trash-outline"
