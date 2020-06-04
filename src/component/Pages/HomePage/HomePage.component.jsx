@@ -31,8 +31,7 @@ const HomePage = ({ history, match, currentUser }) => {
         <CustomButton handleClick={toAddPage} > START TO ADD </CustomButton>
         :
         <div style={{ display: 'flex', flexDirection: 'column'}}>
-          <CustomButton handleClick={toSignIn} > START WITH SIGN IN </CustomButton>
-          <CustomButton variant="outline-primary" handleClick={toAddPage}> START WITHOUT ACCOUNT </CustomButton>
+          <CustomButton handleClick={toSignIn} > SIGN IN TO START </CustomButton>
         </div>
       }
       </div>

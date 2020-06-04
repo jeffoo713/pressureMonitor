@@ -38,6 +38,8 @@ class AddPage extends React.Component {
     const { sys, dia, bpm, date } = this.state;
     const itemToAdd = returnItem({ sys, dia, bpm, date })
     
+    if(!currentUser) return alert('Please sign in to start')
+
     addDataStart(itemToAdd, currentUser, dataArray);
     this.setState({
       sys: '',
