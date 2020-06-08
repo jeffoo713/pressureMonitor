@@ -1,1 +1,5 @@
-{}
+{
+  "projects": {
+    "default": "pressuremonitor-ec90c"
+  }
+}
