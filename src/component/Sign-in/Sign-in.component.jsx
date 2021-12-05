@@ -4,78 +4,83 @@ import { connect } from 'react-redux';
 import InputField from '../../component/Input-field/Input-field.component';
 import CustomButton from '../../component/Button/Button.component';
 
-import { googleSignInStart, emailSignInStart } from '../../redux/user/user.action-creaters';
+import {
+  googleSignInStart,
+  emailSignInStart,
+} from '../../redux/user/user.action-creaters';
 
 class SignIn extends React.Component {
   constructor() {
-    super()
-    this.state={
+    super();
+    this.state = {
       email: '',
-      password: ''
-    }
+      password: '',
+    };
   }
 
   handleSignIn = async event => {
     event.preventDefault();
-    const { emailSignInStart } = this.props
+    const { emailSignInStart } = this.props;
     const { email, password } = this.state;
     emailSignInStart(email, password);
-  }
+  };
 
   handleChange = event => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
-  }
+  };
 
   render() {
     const { buttonStyle, googleSignInStart } = this.props;
-    return(
-      <div 
-        style={{ 
+    return (
+      <div
+        style={{
           width: '30vw',
-          height: '60vh',
+          height: '45vh',
           marginLeft: 'auto',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          justifyContent: 'space-evenly',
+          justifyContent: 'space-between',
         }}
       >
         <h4>Sign In</h4>
-        <div style={{width: '70%'}}>
+        <div style={{ width: '70%' }}>
           <InputField
-           name='email'
-           type='email' 
-           handleChange={this.handleChange} 
-           value={this.state.email}
-           placeholder='Email'
+            name='email'
+            type='email'
+            handleChange={this.handleChange}
+            value={this.state.email}
+            placeholder='Email'
           />
-          <InputField 
-            name='password' 
-            type='password' 
+          <InputField
+            name='password'
+            type='password'
             value={this.state.password}
             handleChange={this.handleChange}
             placeholder='Password'
           />
-          </div>
-          <div style={buttonStyle}>
-            <CustomButton
-              variant="primary"
-              handleClick={this.handleSignIn}
-            >SIGN IN</CustomButton>
-            <CustomButton
-              variant="outline-primary"
-              handleClick={googleSignInStart}
-            >GOOGLE SIGN IN</CustomButton>
-          </div>
+        </div>
+        <div style={buttonStyle}>
+          <CustomButton variant='primary' handleClick={this.handleSignIn}>
+            SIGN IN
+          </CustomButton>
+          <CustomButton
+            variant='outline-primary'
+            handleClick={googleSignInStart}
+          >
+            GOOGLE SIGN IN
+          </CustomButton>
+        </div>
       </div>
-    )
+    );
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   googleSignInStart: () => dispatch(googleSignInStart()),
-  emailSignInStart: (email, password) => dispatch(emailSignInStart({ email, password }))
-})
+  emailSignInStart: (email, password) =>
+    dispatch(emailSignInStart({ email, password })),
+});
 
 export default connect(null, mapDispatchToProps)(SignIn);
