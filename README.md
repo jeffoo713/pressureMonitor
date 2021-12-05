@@ -9,15 +9,11 @@
 
 ## General info
 
----
-
 ## App that manages your blood pressures and get stats from it
 
 Diployed at https://pressuremonitor-ec90c.firebaseapp.com/ via Google Firebase
 
 ## Sample image
-
----
 
 Input measurement
 ![sample1](https://github.com/jeffk713/pressureMonitor/blob/master/sample-image/image1.png?raw=true)
@@ -26,15 +22,11 @@ Statistics
 
 ## Tech stack
 
----
-
 - React.js
-- Firbase; authentication and
+- Firbase; authentication and storage
 - Bootstrap
 
 ## Set up
-
----
 
 To run this project:
 
