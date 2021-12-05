@@ -38,7 +38,7 @@ Statistics
 
 To run this project:
 
-- create `.evn` file with firebase information (refer to .env-example file)
+- create `.env` file with firebase information (refer to .env-example file)
 - install it locally using npm:
 
 ```
