@@ -24,8 +24,8 @@ const HomePage = ({ history, match, currentUser }) => {
         justifyContent: 'space-evenly',
       }}
     >
-      <h3>JEFF's BLOOD PRESSURE MONITOR</h3>
-      <div style={{ marginTop: '20px'}}>
+      <h3>BLOOD PRESSURE MONITOR</h3>
+      <div>
       {
         currentUser?
         <CustomButton handleClick={toAddPage} > START TO ADD </CustomButton>
