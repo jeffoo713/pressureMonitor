@@ -4,6 +4,8 @@
 
 - [General info](#general-info)
 - [Sample image](#sample-image)
+- [Tech stack](#tech-stack)
+- [Set up](#set-up)
 
 ## General info
 
@@ -22,7 +24,7 @@ Input measurement
 Statistics
 ![sample1](https://github.com/jeffk713/pressureMonitor/blob/master/sample-image/image2.png?raw=true)
 
-## Tech Stack
+## Tech stack
 
 ---
 
